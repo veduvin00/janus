@@ -268,10 +268,17 @@ CUSTOM_CSS = """
     border: 1px solid var(--line);
     background: var(--card);
     border-radius: 8px;
-    padding: 11px 12px;
-    margin-bottom: 8px;
+    padding: 13px 13px;
+    margin-bottom: 9px;
     cursor: pointer;
     transition: all 0.12s ease-in-out;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .callrow > nicegui-html,
+  .callrow nicegui-html {
+    width: 100% !important;
+    display: block !important;
   }
   .callrow:hover {
     border-color: var(--accent);
@@ -528,7 +535,7 @@ def main_page():
             <div class="text-[11px] uppercase tracking-[.8px] text-[#5a6d85] mb-[10px] font-semibold">Priority Triage Queue</div>
             """)
 
-            triage_box = ui.column().classes("w-full gap-0")
+            triage_box = ui.column().classes("w-full items-stretch gap-0")
 
             def select_client(cid: str):
                 active_cid["cid"] = cid
@@ -543,18 +550,21 @@ def main_page():
                 for r in triage_rows:
                     cid = r["client_id"]
                     is_active = (cid == active_cid["cid"])
-                    row_el = ui.column().classes(f"callrow w-full {'active' if is_active else ''}")
+                    row_el = ui.column().classes(f"callrow w-full items-stretch {'active' if is_active else ''}")
                     row_elements[cid] = row_el
 
                     with row_el:
                         ui.html(f"""
-                        <div class="flex items-center justify-between w-full mb-1">
+                        <div class="flex items-center justify-between w-full mb-1.5">
                           <span class="rank-badge">{r['rank']}</span>
-                          <span class="serif-font text-[14px] text-[#1f71ac] font-bold">{r['score']}</span>
+                          <div class="flex items-baseline gap-1.5">
+                            <span class="text-[9.5px] uppercase tracking-[0.6px] text-[#8492a6] font-medium">Urgency Score</span>
+                            <span class="serif-font text-[14px] text-[#1f71ac] font-bold">{r['score']}</span>
+                          </div>
                         </div>
                         <div class="font-semibold text-[13.5px] text-[#0c2340] leading-snug">{r['client_name']}</div>
-                        <div class="text-[#5a6d85] text-[11.5px] mt-1 leading-snug">{r['top_reason']}</div>
-                        """)
+                        <div class="text-[#6b7c93] text-[11.5px] mt-1.5 leading-snug">{r['top_reason']}</div>
+                        """).classes("w-full")
                     row_el.on("click", lambda _, c=cid: select_client(c))
 
         # =========================================================================
@@ -825,8 +835,8 @@ def main_page():
                         if ins.evidence.rm_note:
                             rm_note_html = f"""
                             <div class="rmnote-box w-full">
-                              <div class="flex items-center gap-1.5 text-[10.5px] uppercase tracking-wider font-bold text-[#8a5b13] mb-0.5">
-                                <span>📋</span> RM Note on File
+                              <div class="text-[10.5px] uppercase tracking-wider font-bold text-[#8a5b13] mb-0.5">
+                                RM Note on File
                               </div>
                               <div class="text-[#202936] italic leading-normal">{ins.evidence.rm_note}</div>
                             </div>

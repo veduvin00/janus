@@ -162,7 +162,7 @@ def clean_market_summary(summary: str) -> str:
         url = match.group(2)
         return (
             f'<a href="{url}" target="_blank" rel="noopener" '
-            f'class="inline-block bg-[#f0ead9] text-[#8a6d3b] hover:underline font-medium text-[11px] px-1.5 py-0.5 rounded border border-[#e5e3dd] ml-1 mr-0.5 align-middle">'
+            f'class="inline-block bg-[#eaf2f8] text-[#1f71ac] hover:underline font-semibold text-[11px] px-1.5 py-0.5 rounded border border-[#d2e3f2] ml-1 mr-0.5 align-middle">'
             f'{domain} ↗</a>'
         )
 
@@ -175,7 +175,7 @@ def clean_market_summary(summary: str) -> str:
 
     html_parts = []
     for p in paragraphs:
-        html_parts.append(f'<p class="mb-2 leading-relaxed text-[13px] text-[#232a32]">{p}</p>')
+        html_parts.append(f'<p class="mb-2 leading-relaxed text-[13px] text-[#202936]">{p}</p>')
 
     return "".join(html_parts)
 
@@ -232,35 +232,42 @@ def build_smart_market_query(store: DataStore, client_id: str, insight: Insight,
 
 
 CUSTOM_CSS = """
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --ink: #12161c;
-    --slate: #5b6672;
-    --line: #e5e3dd;
-    --paper: #f6f4ef;
-    --card: #ffffff;
-    --accent: #8a6d3b;
-    --accent-soft: #f0ead9;
-    --crit: #8b2f2f;
-    --high: #b4632a;
-    --med: #8a6d3b;
-    --low: #5b6672;
-    --serif: "Iowan Old Style", Georgia, "Times New Roman", serif;
-    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --ink: #0c2340;          /* Julius Baer Primary Swiss Navy */
+    --text: #202936;         /* Refined Charcoal body text */
+    --slate: #5a6d85;        /* Julius Baer Corporate Slate */
+    --line: #e2e8f0;         /* Modern crisp border */
+    --paper: #f5f7fa;        /* Clean Swiss background */
+    --card: #ffffff;         /* Pure white cards */
+    --accent: #1f71ac;       /* Julius Baer Royal Accent Blue */
+    --accent-soft: #eaf2f8;  /* Light Ice Blue tint */
+    --accent-hover: #165684;
+    --crit: #b91c1c;         /* Crisp Crimson */
+    --high: #d97706;         /* Warm Amber */
+    --med: #1f71ac;          /* Julius Baer Blue */
+    --low: #5a6d85;          /* Corporate Slate */
+    --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --heading: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   }
   body {
     margin: 0;
     font-family: var(--sans);
-    color: var(--ink);
+    color: var(--text);
     background-color: var(--paper) !important;
+    -webkit-font-smoothing: antialiased;
   }
   .serif-font {
-    font-family: var(--serif);
+    font-family: var(--heading);
+    letter-spacing: -0.02em;
   }
   .callrow {
     border: 1px solid var(--line);
     background: var(--card);
-    border-radius: 10px;
+    border-radius: 8px;
     padding: 11px 12px;
     margin-bottom: 8px;
     cursor: pointer;
@@ -286,15 +293,15 @@ CUSTOM_CSS = """
     color: #ffffff;
     font-size: 11px;
     margin-right: 6px;
-    font-weight: 600;
+    font-weight: 700;
   }
   .card-box {
     background: var(--card);
     border: 1px solid var(--line);
-    border-radius: 12px;
+    border-radius: 10px;
     padding: 18px 20px;
     margin-bottom: 18px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    box-shadow: 0 1px 3px rgba(12, 35, 64, 0.04);
   }
   .pill {
     font-size: 10px;
@@ -311,74 +318,65 @@ CUSTOM_CSS = """
   .pill-low { background: var(--low); }
   .pill-info { background: var(--low); }
 
-  .chip {
-    font-size: 12px;
+  /* Structured Financial Metrics & Evidence Panels (Informational, NOT Buttons) */
+  .metric-card {
+    background: #f8fafc;
     border: 1px solid var(--line);
-    background: var(--paper);
-    border-radius: 16px;
-    padding: 4px 11px;
-    cursor: pointer;
-    transition: 0.1s;
-    white-space: nowrap;
-    display: inline-block;
-    user-select: none;
-    margin: 3px 4px 3px 0;
-    color: var(--ink);
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin: 8px 0;
   }
-  .chip:hover {
-    border-color: var(--accent);
-    background: var(--accent-soft);
-  }
-  .chip.event { border-style: dashed; }
-  .chip.neg { color: var(--crit); font-weight: 600; }
-
-  .prov {
-    background: #faf8f3;
+  .metric-grid-item {
+    background: #ffffff;
     border: 1px solid var(--line);
-    border-left: 3px solid var(--accent);
     border-radius: 6px;
-    padding: 8px 12px;
-    margin: 6px 0 10px 0;
-    font-size: 12.5px;
-    line-height: 1.5;
-    display: none;
+    padding: 8px 10px;
+    text-align: center;
   }
-  .prov.open { display: block; }
-  .prov .k { color: var(--slate); font-weight: 600; }
-
+  .event-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 11.5px;
+    color: #334155;
+    margin: 3px 4px 3px 0;
+  }
   .caveat {
-    font-size: 12.5px;
-    color: var(--high);
-    background: #fbf3ea;
+    font-size: 12px;
+    color: #92400e;
+    background: #fffbeb;
+    border: 1px solid #fde68a;
     border-radius: 6px;
     padding: 7px 11px;
-    margin-top: 10px;
+    margin: 8px 0;
   }
-  .rmnote {
-    margin-top: 10px;
-    font-size: 12.5px;
+  .rmnote-box {
+    background: #fffdf7;
+    border: 1px solid #f1e5cd;
+    border-left: 3px solid #d97706;
+    border-radius: 0 6px 6px 0;
+    padding: 9px 12px;
+    margin: 8px 0;
+    font-size: 12px;
   }
-  .rmnote summary {
-    cursor: pointer;
-    color: var(--accent);
-    font-weight: 600;
-  }
-  .rmnote p {
-    color: #333333;
-    background: var(--paper);
-    border-radius: 6px;
-    padding: 9px 11px;
-    margin: 6px 0 0;
-    line-height: 1.5;
-    font-style: italic;
+  .action-container {
+    background: #f0f7fc;
+    border: 1px solid #d2e3f2;
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-top: 12px;
   }
 
-  /* Explicit Private-Banking Button System */
+  /* Explicit Julius Bär Private-Banking Button System */
   .btn-action {
     font-family: var(--sans) !important;
     font-size: 12px !important;
     font-weight: 500 !important;
-    border-radius: 7px !important;
+    border-radius: 6px !important;
     padding: 6px 14px !important;
     cursor: pointer !important;
     transition: all 0.12s ease-in-out !important;
@@ -392,46 +390,46 @@ CUSTOM_CSS = """
     text-transform: none !important;
   }
   .btn-action.btn-dark {
-    background-color: #12161c !important;
+    background-color: #0c2340 !important;
     color: #ffffff !important;
-    border: 1px solid #12161c !important;
+    border: 1px solid #0c2340 !important;
   }
   .btn-action.btn-dark:hover {
-    background-color: #232a32 !important;
+    background-color: #163259 !important;
   }
   .btn-action.btn-outline {
     background-color: #ffffff !important;
-    color: #12161c !important;
-    border: 1px solid #e5e3dd !important;
+    color: #0c2340 !important;
+    border: 1px solid #cbd5e1 !important;
   }
   .btn-action.btn-outline:hover {
-    border-color: #8a6d3b !important;
-    background-color: #faf8f3 !important;
+    border-color: #1f71ac !important;
+    background-color: #f0f7fc !important;
   }
   .btn-action.btn-accepted {
-    background-color: #2e7d32 !important;
+    background-color: #15803d !important;
     color: #ffffff !important;
-    border: 1px solid #2e7d32 !important;
+    border: 1px solid #15803d !important;
   }
   .btn-action.btn-modified {
-    background-color: #8a6d3b !important;
+    background-color: #1f71ac !important;
     color: #ffffff !important;
-    border: 1px solid #8a6d3b !important;
+    border: 1px solid #1f71ac !important;
   }
   .btn-action.btn-rejected {
-    background-color: #5b6672 !important;
+    background-color: #5a6d85 !important;
     color: #ffffff !important;
-    border: 1px solid #5b6672 !important;
+    border: 1px solid #5a6d85 !important;
   }
   .btn-action.btn-ghost {
     background-color: #ffffff !important;
-    color: #5b6672 !important;
-    border: 1px solid #e5e3dd !important;
+    color: #5a6d85 !important;
+    border: 1px solid #cbd5e1 !important;
   }
   .btn-action.btn-ghost:hover {
-    color: #12161c !important;
-    border-color: #8a6d3b !important;
-    background-color: #faf8f3 !important;
+    color: #0c2340 !important;
+    border-color: #1f71ac !important;
+    background-color: #f0f7fc !important;
   }
 
   /* Market Context Enquiry Box Styling */
@@ -440,7 +438,7 @@ CUSTOM_CSS = """
     border-radius: 8px;
     padding: 12px 14px;
     font-size: 12.5px;
-    background: #f4f6f8;
+    background: #f8fafc;
     border: 1px solid var(--line);
   }
   .enqsection {
@@ -451,15 +449,15 @@ CUSTOM_CSS = """
     border: 1px solid var(--line);
   }
   .enqsection.ext {
-    background: #fff8ea;
-    border-color: #e8d9ad;
+    background: #fffdf5;
+    border-color: #fde68a;
   }
   .enqlabel {
     font-size: 10.5px;
     font-weight: 700;
     letter-spacing: .6px;
     text-transform: uppercase;
-    color: var(--slate);
+    color: var(--ink);
     margin-bottom: 6px;
   }
   .mktlabel {
@@ -467,7 +465,7 @@ CUSTOM_CSS = """
     font-weight: 700;
     letter-spacing: .6px;
     text-transform: uppercase;
-    color: #8a6d1f;
+    color: #b45309;
     margin-bottom: 6px;
   }
   .enqsection .src {
@@ -518,10 +516,16 @@ def main_page():
         # =========================================================================
         # Column 1: Left Rail (Triage Call List)
         # =========================================================================
-        with ui.column().classes("w-[300px] h-screen overflow-y-auto p-[20px_16px] bg-[#fbfaf7] border-r border-[#e5e3dd] flex-shrink-0"):
-            ui.html('<h1 class="serif-font text-[18px] font-semibold m-0 leading-tight">Wealth Intelligence</h1>')
-            ui.html('<div class="text-[#5b6672] text-[12px] mb-[16px]">Priscilla Ong · Asia desk · today 26 Aug 2026</div>')
-            ui.html('<div class="text-[11px] uppercase tracking-[.8px] text-[#5b6672] mb-[10px] font-medium">Who to call first</div>')
+        with ui.column().classes("w-[300px] h-screen overflow-y-auto p-[20px_16px] bg-[#ffffff] border-r border-[#e2e8f0] flex-shrink-0"):
+            ui.html("""
+            <div class="flex items-center gap-2 mb-3">
+              <div class="w-6 h-6 rounded bg-[#0c2340] text-white flex items-center justify-center font-bold text-[11px] tracking-wider">JB</div>
+              <span class="text-[11px] uppercase tracking-[1.2px] text-[#0c2340] font-bold">Bank Julius Bär</span>
+            </div>
+            <h1 class="serif-font text-[18px] font-bold text-[#0c2340] m-0 leading-tight">Wealth Intelligence</h1>
+            <div class="text-[#5a6d85] text-[12px] mt-1 mb-[16px]">Priscilla Ong · Asia desk · 26 Aug 2026</div>
+            <div class="text-[11px] uppercase tracking-[.8px] text-[#5a6d85] mb-[10px] font-semibold">Priority Triage Queue</div>
+            """)
 
             triage_box = ui.column().classes("w-full gap-0")
 
@@ -544,24 +548,24 @@ def main_page():
                     with row_el:
                         ui.html(f"""
                         <div class="flex justify-between items-baseline gap-2 w-full">
-                          <div class="font-semibold text-[13.5px]">
+                          <div class="font-semibold text-[13.5px] text-[#0c2340]">
                             <span class="rank-badge">{r['rank']}</span>{r['client_name']}
                           </div>
-                          <div class="serif-font text-[15.5px] text-[#8a6d3b] font-medium">{r['score']}</div>
+                          <div class="serif-font text-[15px] text-[#1f71ac] font-bold">{r['score']}</div>
                         </div>
-                        <div class="text-[#5b6672] text-[11.5px] mt-1 leading-snug">{r['top_reason']}</div>
+                        <div class="text-[#5a6d85] text-[11.5px] mt-1 leading-snug">{r['top_reason']}</div>
                         """)
                     row_el.on("click", lambda _, c=cid: select_client(c))
 
         # =========================================================================
         # Column 2: Center Panel (Client Insights View)
         # =========================================================================
-        main_container = ui.column().classes("flex-grow h-screen overflow-y-auto p-[26px_34px] max-w-[860px] bg-[#f6f4ef]")
+        main_container = ui.column().classes("flex-grow h-screen overflow-y-auto p-[26px_34px] max-w-[860px] bg-[#f5f7fa]")
 
         # =========================================================================
         # Column 3: Right Rail (RM Decision Log & Meeting Prep)
         # =========================================================================
-        right_container = ui.column().classes("w-[340px] h-screen overflow-y-auto p-[20px_16px] bg-[#ffffff] border-l border-[#e5e3dd] flex-shrink-0")
+        right_container = ui.column().classes("w-[340px] h-screen overflow-y-auto p-[20px_16px] bg-[#ffffff] border-l border-[#e2e8f0] flex-shrink-0")
 
         def refresh_right_panel():
             right_container.clear()
@@ -573,14 +577,14 @@ def main_page():
             with right_container:
                 # Header
                 ui.html("""
-                <div class="border-b border-[#e5e3dd] pb-3 mb-3 w-full">
+                <div class="border-b border-[#e2e8f0] pb-3 mb-3 w-full">
                   <div class="flex justify-between items-baseline">
-                    <h2 class="serif-font text-[17px] font-semibold m-0">RM Decision Log</h2>
-                    <span class="text-[10.5px] text-[#2e7d32] font-semibold bg-[#e8f5e9] px-2 py-0.5 rounded-full">● Saved to JSON</span>
+                    <h2 class="serif-font text-[17px] font-bold text-[#0c2340] m-0">RM Decision Log</h2>
+                    <span class="text-[10.5px] text-[#15803d] font-semibold bg-[#e8f5e9] px-2 py-0.5 rounded-full border border-[#c8e6c9]">● Saved to JSON</span>
                   </div>
-                  <div class="text-[11.5px] text-[#5b6672] mt-0.5">Audit trail & Meeting Prep talking points</div>
-                  <div class="text-[11px] text-[#5b6672] mt-1">
-                    <b>""" + str(len(decisions)) + """</b> total · <span class="text-[#2e7d32]">""" + str(accepted_count) + """ accepted</span> · <span class="text-[#8a6d3b]">""" + str(modified_count) + """ modified</span>
+                  <div class="text-[11.5px] text-[#5a6d85] mt-0.5">Audit trail & Meeting Prep talking points</div>
+                  <div class="text-[11px] text-[#5a6d85] mt-1">
+                    <b>""" + str(len(decisions)) + """</b> total · <span class="text-[#15803d]">""" + str(accepted_count) + """ accepted</span> · <span class="text-[#1f71ac]">""" + str(modified_count) + """ modified</span>
                   </div>
                 </div>
                 """)
@@ -603,7 +607,7 @@ def main_page():
 
                 if not filtered:
                     ui.html("""
-                    <div class="text-center text-[#5b6672] text-[12px] italic mt-12 px-4 leading-relaxed">
+                    <div class="text-center text-[#5a6d85] text-[12px] italic mt-12 px-4 leading-relaxed">
                       No decisions recorded under this view.<br>
                       Click <b>Accept</b>, <b>Modify</b>, or <b>Reject</b> on any client insight card to log decisions.
                     </div>
@@ -614,45 +618,45 @@ def main_page():
                 for d in filtered:
                     d_id = d.get("decision_id", "")
                     act = d.get("action", "")
-                    pill_color = "#2e7d32" if act == "ACCEPT" else "#8a6d3b" if act == "MODIFY" else "#5b6672"
+                    pill_color = "#15803d" if act == "ACCEPT" else "#1f71ac" if act == "MODIFY" else "#5a6d85"
 
                     with ui.column().classes("decision-card w-full gap-1"):
                         with ui.row().classes("w-full justify-between items-center no-wrap"):
                             ui.html(f"""
                             <div class="flex items-center gap-1.5">
                               <span style="background-color: {pill_color}; color: #ffffff; font-size: 9.5px; font-weight: 700; padding: 2px 7px; border-radius: 12px;">{act}</span>
-                              <span class="text-[10px] text-[#5b6672]">{d.get('timestamp', '')[11:16]}</span>
+                              <span class="text-[10px] text-[#5a6d85]">{d.get('timestamp', '')[11:16]}</span>
                             </div>
                             """)
                             # Undo/Delete decision button
-                            del_btn = ui.button("✕").props("no-caps flat dense").classes("text-[#5b6672] hover:text-[#8b2f2f] text-[11px] p-0 min-w-[16px]")
+                            del_btn = ui.button("✕").props("no-caps flat dense").classes("text-[#5a6d85] hover:text-[#b91c1c] text-[11px] p-0 min-w-[16px]")
                             def undo_action(dec_id=d_id):
                                 delete_decision_entry(dec_id)
-                                ui.notify("Decision removed", type="info", color="#12161c")
+                                ui.notify("Decision removed", type="info", color="#0c2340")
                                 refresh_right_panel()
                                 render_client_view(active_cid["cid"])
                             del_btn.on("click", undo_action)
 
                         ui.html(f"""
-                        <div class="font-semibold text-[12px] text-[#12161c] mt-0.5">{d.get('client_name')} <span class="text-[#5b6672] font-normal">({d.get('client_id')})</span></div>
-                        <div class="text-[11.5px] text-[#232a32] leading-snug">{d.get('headline')}</div>
+                        <div class="font-semibold text-[12px] text-[#0c2340] mt-0.5">{d.get('client_name')} <span class="text-[#5a6d85] font-normal">({d.get('client_id')})</span></div>
+                        <div class="text-[11.5px] text-[#202936] leading-snug">{d.get('headline')}</div>
                         """)
 
                         if act == "ACCEPT":
                             ui.html(f"""
-                            <div class="bg-[#f4f7f4] border-l-2 border-[#2e7d32] p-1.5 rounded-r text-[11px] text-[#1b5e20] mt-1">
+                            <div class="bg-[#f0fdf4] border-l-2 border-[#15803d] p-1.5 rounded-r text-[11px] text-[#166534] mt-1">
                               <b>Meeting talking point:</b> {d.get('suggested_action')}
                             </div>
                             """)
                         elif act == "MODIFY":
                             ui.html(f"""
-                            <div class="bg-[#faf6ed] border-l-2 border-[#8a6d3b] p-1.5 rounded-r text-[11px] text-[#6d4c13] mt-1">
+                            <div class="bg-[#eaf2f8] border-l-2 border-[#1f71ac] p-1.5 rounded-r text-[11px] text-[#0c2340] mt-1">
                               <b>RM Custom Plan:</b> {d.get('rm_notes') or d.get('suggested_action')}
                             </div>
                             """)
                         elif act == "REJECT":
                             ui.html(f"""
-                            <div class="bg-[#f5f5f5] border-l-2 border-[#5b6672] p-1.5 rounded-r text-[11px] text-[#424242] mt-1 italic">
+                            <div class="bg-[#f8fafc] border-l-2 border-[#5a6d85] p-1.5 rounded-r text-[11px] text-[#334155] mt-1 italic">
                               <b>Reason:</b> {d.get('rm_notes') or 'Dismissed by RM'}
                             </div>
                             """)
@@ -678,13 +682,19 @@ def main_page():
                 name = c.get("client_name") or cid
 
                 header_html = f"""
-                <div class="border-b border-[#e5e3dd] pb-4 mb-2 w-full">
-                  <h2 class="serif-font text-[25px] font-semibold m-0 leading-tight">{name}</h2>
-                  <div class="text-[#5b6672] text-[13px] mt-1">
-                    {cid} · {age_part}{risk} mandate · {curr} · AUM {aum_str} USD
+                <div class="border-b border-[#e2e8f0] pb-4 mb-2 w-full">
+                  <div class="flex justify-between items-start">
+                    <div>
+                      <h2 class="serif-font text-[24px] font-bold text-[#0c2340] m-0 leading-tight">{name}</h2>
+                      <div class="text-[#5a6d85] text-[13px] mt-1">
+                        {cid} · {age_part}{risk} mandate · {curr} · AUM {aum_str} USD
+                      </div>
+                    </div>
+                    <span class="text-[11px] uppercase tracking-wider font-semibold text-[#1f71ac] bg-[#eaf2f8] px-2.5 py-1 rounded-full border border-[#d2e3f2]">Julius Bär Mandate</span>
                   </div>
-                  <div class="italic text-[#12161c] bg-[#f0ead9] p-[8px_12px] rounded-lg text-[12.5px] mt-3 leading-normal">
-                    Objective — {objs}
+                  <div class="text-[#0c2340] bg-[#eaf2f8] border-l-4 border-[#1f71ac] p-[9px_13px] rounded-r-md text-[12.5px] mt-3 leading-normal font-medium">
+                    <span class="text-[10.5px] uppercase tracking-[0.7px] text-[#1f71ac] font-bold block mb-0.5">Mandate Objective</span>
+                    {objs}
                   </div>
                 </div>
                 """
@@ -692,7 +702,7 @@ def main_page():
 
                 # Insights Cards
                 if not insights:
-                    ui.html('<div class="text-[#5b6672] mt-8">No flags for this client.</div>')
+                    ui.html('<div class="text-[#5a6d85] mt-8">No flags for this client.</div>')
                     return
 
                 for idx, ins in enumerate(insights):
@@ -706,58 +716,97 @@ def main_page():
                         card_top_html = f"""
                         <div class="flex items-center gap-[10px] mb-2 w-full">
                           <span class="pill {sev_class}">{ins.severity}</span>
-                          <span class="text-[11px] uppercase tracking-[.8px] text-[#5b6672] font-semibold">{ins.type}</span>
-                          <span class="ml-auto text-[11px] text-[#5b6672]">confidence <b class="text-[#12161c]">{ins.confidence}</b></span>
+                          <span class="text-[11px] uppercase tracking-[.8px] text-[#5a6d85] font-semibold">{ins.type}</span>
+                          <span class="ml-auto text-[11px] text-[#5a6d85]">confidence <b class="text-[#0c2340]">{ins.confidence}</b></span>
                         </div>
-                        <div class="serif-font text-[16.5px] font-semibold leading-snug my-1">{ins.headline}</div>
-                        <div class="text-[13.5px] leading-relaxed text-[#232a32]">{ins.narrative}</div>
+                        <div class="serif-font text-[16px] font-bold text-[#0c2340] leading-snug my-1">{ins.headline}</div>
                         """
                         ui.html(card_top_html).classes("w-full")
 
-                        # Chips (Contributions & Events)
-                        chips_html = '<div class="my-3 flex flex-wrap gap-1 w-full">'
-                        prov_html = ""
-
-                        for c_idx, contrib in enumerate(ins.contributions):
-                            pid = f"p_{idx}_{c_idx}"
-                            val = contrib.value
-                            neg_class = "neg" if isinstance(val, (int, float)) and val < 0 else ""
+                        # 1. Computed Metrics & Breakdown (Structured Financial Data, NOT Buttons)
+                        contribs = ins.contributions or []
+                        metrics_html = ""
+                        if len(contribs) == 1:
+                            c = contribs[0]
+                            val = c.value
+                            val_color = "text-[#b91c1c]" if isinstance(val, (int, float)) and val < 0 else "text-[#0c2340]"
                             val_str = ("−" + format_val(abs(val))) if isinstance(val, (int, float)) and val < 0 else format_val(val)
-                            unit_str = f" {contrib.unit}" if contrib.unit else ""
+                            unit_str = f"{c.unit}" if c.unit == "%" else f" {c.unit}" if c.unit else ""
+                            detail_txt = c.detail or "Mandate & portfolio position exposure"
 
-                            chips_html += f'<span class="chip {neg_class}" onclick="tog(\'{pid}\')">{contrib.label}: {val_str}{unit_str}</span>'
-                            detail_txt = contrib.detail or "—"
-                            prov_html += f'<div class="prov w-full" id="{pid}"><span class="k">how derived:</span> {detail_txt}</div>'
+                            metrics_html = f"""
+                            <div class="metric-card flex items-center justify-between w-full my-2.5">
+                              <div>
+                                <div class="text-[10px] uppercase tracking-wider font-bold text-[#5a6d85]">Exposure & Position Factor</div>
+                                <div class="text-[13.5px] font-bold text-[#0c2340] mt-0.5">{c.label}</div>
+                                <div class="text-[11.5px] text-[#5a6d85] mt-0.5">{detail_txt}</div>
+                              </div>
+                              <div class="text-right pl-4 border-l border-[#e2e8f0] flex-shrink-0">
+                                <div class="text-[20px] font-bold {val_color} leading-none">{val_str}{unit_str}</div>
+                                <div class="text-[10px] uppercase tracking-wider text-[#5a6d85] font-semibold mt-1">Portfolio Weight</div>
+                              </div>
+                            </div>
+                            """
+                        elif len(contribs) > 1:
+                            grid_items = []
+                            for c in contribs:
+                                val = c.value
+                                is_neg = isinstance(val, (int, float)) and val < 0
+                                is_pos = isinstance(val, (int, float)) and val > 0 and c.unit == "USD"
+                                val_color = "text-[#b91c1c]" if is_neg else "text-[#15803d]" if is_pos else "text-[#0c2340]"
+                                val_str = ("−" + format_val(abs(val))) if is_neg else ("+" + format_val(val)) if is_pos else format_val(val)
+                                unit_str = f"{c.unit}" if c.unit == "%" else f" {c.unit}" if c.unit else ""
+                                detail_txt = c.detail or "Decomposition factor"
 
-                        for e_idx, ev in enumerate(ins.evidence.event_refs or []):
-                            eid = f"e_{idx}_{e_idx}"
-                            short_ev = ev.split(":")[0]
-                            chips_html += f'<span class="chip event" onclick="tog(\'{eid}\')">⚑ {short_ev}</span>'
-                            prov_html += f'<div class="prov w-full" id="{eid}"><span class="k">event_log:</span> {ev}</div>'
+                                grid_items.append(f"""
+                                <div class="metric-grid-item flex-1 min-w-[120px]">
+                                  <div class="text-[10px] uppercase tracking-wider font-bold text-[#5a6d85] truncate">{c.label}</div>
+                                  <div class="text-[15px] font-bold {val_color} my-0.5 leading-tight">{val_str}{unit_str}</div>
+                                  <div class="text-[10.5px] text-[#5a6d85] truncate">{detail_txt}</div>
+                                </div>
+                                """)
+                            metrics_html = f"""
+                            <div class="metric-card w-full my-2.5">
+                              <div class="text-[10px] uppercase tracking-wider font-bold text-[#5a6d85] mb-2">Performance & Exposure Decomposition</div>
+                              <div class="flex gap-2 w-full flex-wrap">
+                                {"".join(grid_items)}
+                              </div>
+                            </div>
+                            """
 
-                        chips_html += '</div>'
-                        ui.html(chips_html + prov_html).classes("w-full")
+                        # 2. Event Log & Evidence Trail (Informational, NOT Buttons)
+                        events_html = ""
+                        if ins.evidence.event_refs:
+                            ev_badges = []
+                            for ev in ins.evidence.event_refs:
+                                ev_badges.append(f'<span class="event-badge"><span class="font-bold text-[#0c2340]">⚑ Event Log:</span> {ev}</span>')
+                            events_html = f'<div class="my-2 flex flex-wrap gap-1 w-full">{"".join(ev_badges)}</div>'
 
-                        # Caveats
+                        # 3. Caveats
+                        caveats_html = ""
                         if ins.caveats:
                             caveats_html = "".join(f'<div class="caveat">⚠︎ {cav}</div>' for cav in ins.caveats)
-                            ui.html(caveats_html).classes("w-full")
 
-                        # RM Note
+                        # 4. RM Note on File (Prominent, uncollapsed memo card)
+                        rm_note_html = ""
                         if ins.evidence.rm_note:
-                            note_html = f"""
-                            <details class="rmnote w-full">
-                              <summary>RM note on file</summary>
-                              <p>{ins.evidence.rm_note}</p>
-                            </details>
+                            rm_note_html = f"""
+                            <div class="rmnote-box w-full">
+                              <div class="flex items-center gap-1.5 text-[10.5px] uppercase tracking-wider font-bold text-[#8a5b13] mb-0.5">
+                                <span>📋</span> RM Note on File
+                              </div>
+                              <div class="text-[#202936] italic leading-normal">{ins.evidence.rm_note}</div>
+                            </div>
                             """
-                            ui.html(note_html).classes("w-full")
 
-                        # Action Area
-                        with ui.column().classes("w-full mt-3 pt-3 border-t border-dashed border-[#e5e3dd]"):
+                        ui.html(metrics_html + events_html + caveats_html + rm_note_html).classes("w-full")
+
+                        # 5. Recommendation & Decision Action Box
+                        with ui.column().classes("action-container w-full gap-0"):
                             ui.html(f"""
-                            <div class="text-[11px] uppercase tracking-[.7px] text-[#5b6672] font-semibold">Suggested action</div>
-                            <div class="text-[13px] my-1 leading-normal">{ins.suggested_action}</div>
+                            <div class="text-[10px] uppercase tracking-wider font-bold text-[#1f71ac] mb-1">Recommended Next Step</div>
+                            <div class="text-[13px] font-semibold text-[#0c2340] leading-snug mb-3">{ins.suggested_action}</div>
+                            <div class="w-full border-t border-[#d2e3f2] mb-3"></div>
                             """)
 
                             # Interactive Button Row
@@ -790,18 +839,18 @@ def main_page():
 
                                 def handle_accept(cur_ins=ins, client_n=name):
                                     record_decision(cid, client_n, cur_ins, "ACCEPT")
-                                    ui.notify(f"Accepted & logged to decisions.json for {client_n}", type="positive", color="#2e7d32")
+                                    ui.notify(f"Accepted & logged to decisions.json for {client_n}", type="positive", color="#15803d")
                                     refresh_right_panel()
                                     render_client_view(cid)
 
                                 def open_modify_dialog(cur_ins=ins, client_n=name):
-                                    with ui.dialog() as mod_dialog, ui.card().classes("w-[500px] p-5"):
-                                        ui.html(f'<h3 class="serif-font text-[17px] font-semibold m-0">Modify Action: {client_n}</h3>')
-                                        ui.html(f'<div class="text-[11.5px] text-[#5b6672] mt-0.5 mb-2">{cur_ins.headline}</div>')
-                                        ui.html('<div class="text-[10.5px] uppercase tracking-[.6px] text-[#5b6672] font-semibold">Original System Suggestion:</div>')
-                                        ui.html(f'<div class="text-[12px] bg-[#faf8f3] p-2.5 rounded border border-[#e5e3dd] my-1.5 leading-relaxed">{cur_ins.suggested_action}</div>')
+                                    with ui.dialog() as mod_dialog, ui.card().classes("w-[500px] p-5 border border-[#e2e8f0] rounded-xl shadow-lg"):
+                                        ui.html(f'<h3 class="serif-font text-[17px] font-bold text-[#0c2340] m-0">Modify Action: {client_n}</h3>')
+                                        ui.html(f'<div class="text-[11.5px] text-[#5a6d85] mt-0.5 mb-2">{cur_ins.headline}</div>')
+                                        ui.html('<div class="text-[10.5px] uppercase tracking-[.6px] text-[#5a6d85] font-semibold">Original System Suggestion:</div>')
+                                        ui.html(f'<div class="text-[12px] bg-[#f8fafc] p-2.5 rounded border border-[#e2e8f0] my-1.5 leading-relaxed text-[#202936]">{cur_ins.suggested_action}</div>')
 
-                                        ui.html('<div class="text-[10.5px] uppercase tracking-[.6px] text-[#5b6672] font-semibold mt-2">RM Revised Instructions / Talking Points:</div>')
+                                        ui.html('<div class="text-[10.5px] uppercase tracking-[.6px] text-[#5a6d85] font-semibold mt-2">RM Revised Instructions / Talking Points:</div>')
                                         existing_note = existing_dec.get("rm_notes") if existing_dec else ""
                                         custom_inp = ui.textarea(value=existing_note or cur_ins.suggested_action).classes("w-full mt-1 text-[12.5px]").props("outlined rows=3")
 
@@ -812,7 +861,7 @@ def main_page():
                                                 note_val = custom_inp.value.strip()
                                                 record_decision(cid, client_n, cur_ins, "MODIFY", note_val)
                                                 mod_dialog.close()
-                                                ui.notify(f"Modified action logged to decisions.json", type="positive", color="#8a6d3b")
+                                                ui.notify(f"Modified action logged to decisions.json", type="positive", color="#1f71ac")
                                                 refresh_right_panel()
                                                 render_client_view(cid)
 
@@ -821,7 +870,7 @@ def main_page():
 
                                 def handle_reject(cur_ins=ins, client_n=name):
                                     record_decision(cid, client_n, cur_ins, "REJECT", "Dismissed by RM (intentional mandate drift / prior agreement)")
-                                    ui.notify(f"Rejected & logged to decisions.json", type="warning", color="#5b6672")
+                                    ui.notify(f"Rejected & logged to decisions.json", type="warning", color="#5a6d85")
                                     refresh_right_panel()
                                     render_client_view(cid)
 
@@ -841,26 +890,26 @@ def main_page():
                             with enquiry_drawer:
                                 with ui.row().classes("w-full gap-2 items-center no-wrap"):
                                     clean_head = ins.headline.replace('"', '&quot;')
-                                    inp_q = ui.input(value=f'Tell me more about: "{clean_head}"').classes("flex-grow bg-white border border-[#e5e3dd] rounded-md px-2 py-1 text-[12px]").props("dense outlined")
+                                    inp_q = ui.input(value=f'Tell me more about: "{clean_head}"').classes("flex-grow bg-white border border-[#cbd5e1] rounded-md px-2 py-1 text-[12px]").props("dense outlined")
                                     btn_ask = ui.button("Ask").props("no-caps unelevated").classes("btn-action btn-dark")
 
                                 # Section 1: From computed data (Ask Why)
                                 with ui.column().classes("enqsection w-full"):
                                     ui.html('<div class="enqlabel">From computed data</div>')
-                                    ans_label = ui.html('<div class="text-[12.5px] leading-relaxed text-[#232a32]">—</div>').classes("w-full")
+                                    ans_label = ui.html('<div class="text-[12.5px] leading-relaxed text-[#202936]">—</div>').classes("w-full")
 
                                 # Section 2: External market color (Web search)
                                 with ui.column().classes("enqsection ext w-full"):
                                     ui.html('<div class="mktlabel">⚠ External market color — unverified, not used in the numbers above</div>')
-                                    ui.html('<div class="text-[10.5px] text-[#8a6d1f] mb-1 italic">ℹ Synthetic IDs (e.g. PF-0019) are automatically mapped to underlying real-world asset class & sector news.</div>')
-                                    mkt_label = ui.html('<div class="text-[12.5px] leading-relaxed text-[#232a32]">—</div>').classes("w-full")
+                                    ui.html('<div class="text-[10.5px] text-[#b45309] mb-1 italic">ℹ Synthetic IDs (e.g. PF-0019) are automatically mapped to underlying real-world asset class & sector news.</div>')
+                                    mkt_label = ui.html('<div class="text-[12.5px] leading-relaxed text-[#202936]">—</div>').classes("w-full")
 
                                 async def run_enquiry(q_elem=inp_q, a_elem=ans_label, m_elem=mkt_label, cur_ins=ins):
                                     query_text = q_elem.value.strip()
                                     if not query_text:
                                         return
-                                    a_elem.set_content('<span class="text-[#5b6672] italic">Asking computed engine…</span>')
-                                    m_elem.set_content('<span class="text-[#5b6672] italic">Searching reputable financial press…</span>')
+                                    a_elem.set_content('<span class="text-[#5a6d85] italic">Asking computed engine…</span>')
+                                    m_elem.set_content('<span class="text-[#5a6d85] italic">Searching reputable financial press…</span>')
 
                                     # Async execution so the UI remains fluid
                                     async def fetch_chat():
@@ -870,12 +919,12 @@ def main_page():
                                                 a_elem.set_content(f'<div class="text-[12.5px] leading-relaxed whitespace-pre-wrap">{ans}</div>')
                                             else:
                                                 a_elem.set_content(
-                                                    '<div class="text-[12px] text-[#5b6672] italic">'
+                                                    '<div class="text-[12px] text-[#5a6d85] italic">'
                                                     'Ask Why is unavailable right now (no OPENAI_API_KEY configured, '
                                                     'or the model call failed) — the rest of the workbench is unaffected.</div>'
                                                 )
                                         except Exception as e:
-                                            a_elem.set_content(f'<div class="text-[12px] text-[#5b6672] italic">Ask Why unavailable: {e}</div>')
+                                            a_elem.set_content(f'<div class="text-[12px] text-[#5a6d85] italic">Ask Why unavailable: {e}</div>')
 
                                     async def fetch_market():
                                         try:
@@ -887,15 +936,15 @@ def main_page():
                                                     f'<span class="src">↳ <a href="{s["url"]}" target="_blank" rel="noopener">{s["title"]}</a></span>'
                                                     for s in mkt_res.get("sources", [])
                                                 )
-                                                m_elem.set_content(f'<div>{cleaned_summary}</div><div class="mt-2 pt-2 border-t border-[#e8d9ad]">{src_links}</div>')
+                                                m_elem.set_content(f'<div>{cleaned_summary}</div><div class="mt-2 pt-2 border-t border-[#fed7aa]">{src_links}</div>')
                                             else:
                                                 m_elem.set_content(
-                                                    '<div class="text-[12px] text-[#8a6d1f] italic">'
+                                                    '<div class="text-[12px] text-[#b45309] italic">'
                                                     'External financial press search found no matching reporting for this specific query. '
                                                     '(Note: Specific portfolio codes like PF-0019 are synthetic for this case study; try searching for broader real-world themes like "Global Equities" or "Corporate Bonds").</div>'
                                                 )
                                         except Exception as e:
-                                            m_elem.set_content(f'<div class="text-[12px] text-[#8a6d1f] italic">Market search unavailable: {e}</div>')
+                                            m_elem.set_content(f'<div class="text-[12px] text-[#b45309] italic">Market search unavailable: {e}</div>')
 
                                     await asyncio.gather(fetch_chat(), fetch_market())
 
@@ -920,4 +969,4 @@ def find_available_port(preferred_ports=(8080, 8000, 8081, 8888)) -> int:
 if __name__ in {"__main__", "__mp_main__"}:
     port = find_available_port([8080, 8000, 8081])
     print(f"\n🚀 Launching RM Intelligence Workbench on http://localhost:{port} ...")
-    ui.run(title="RM Intelligence Workbench", port=port, reload=False, show=True)
+    ui.run(title="Julius Bär — RM Wealth Intelligence", port=port, reload=False, show=True)

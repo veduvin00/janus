@@ -1,0 +1,169 @@
+[
+  {
+    "client_id": "CL-0019",
+    "type": "concentration",
+    "severity": "medium",
+    "headline": "21.7% of the book is exposed to 'em_credit'",
+    "contributions": [
+      {
+        "label": "'em_credit' exposure",
+        "value": 21.7,
+        "unit": "%",
+        "detail": "6,978,200 USD of 32,214,266 USD book"
+      },
+      {
+        "label": "Asia Pacific Shipping and Logistics Fund",
+        "value": 2862200,
+        "unit": "USD",
+        "detail": "in PF-0023"
+      },
+      {
+        "label": "Emerging Market Sovereign Bond Fund",
+        "value": 2130000,
+        "unit": "USD",
+        "detail": "in PF-0023"
+      },
+      {
+        "label": "Asia ex-Japan Equity Fund",
+        "value": 1986000,
+        "unit": "USD",
+        "detail": "in PF-0023"
+      }
+    ],
+    "evidence": {
+      "event_refs": [],
+      "holding_refs": [
+        "SYN-EQ-0025",
+        "SYN-FI-0210",
+        "SYN-EQ-0020"
+      ],
+      "rule_refs": [],
+      "snapshot_pair": [],
+      "rm_note": "Client subscribed the shipping and energy FCN. His view is that charter rates stay elevated while the Strait situation is unresolved. Noted that his operating business benefits from the same conditions. He said the point of the Asia portfolio was to be uncorrelated with the Gulf business. It currently is not."
+    },
+    "confidence": "high",
+    "caveats": [],
+    "suggested_action": "Show the aggregated exposure; test whether it still matches the client's stated intent for this money.",
+    "narrative": "21.7% of the book is exposed to 'em_credit'. 'em_credit' exposure: 21.7 %. Suggested next step: Show the aggregated exposure; test whether it still matches the client's stated intent for this money.",
+    "id": "INS-16547408",
+    "explained_pct": null,
+    "severity_rank": 2
+  },
+  {
+    "client_id": "CL-0019",
+    "type": "concentration",
+    "severity": "medium",
+    "headline": "20.3% of the book is exposed to 'shipping'",
+    "contributions": [
+      {
+        "label": "'shipping' exposure",
+        "value": 20.3,
+        "unit": "%",
+        "detail": "6,538,256 USD of 32,214,266 USD book"
+      },
+      {
+        "label": "Pacific Orient Shipping Ltd",
+        "value": 3676056,
+        "unit": "USD",
+        "detail": "in PF-0023"
+      },
+      {
+        "label": "Asia Pacific Shipping and Logistics Fund",
+        "value": 2862200,
+        "unit": "USD",
+        "detail": "in PF-0023"
+      }
+    ],
+    "evidence": {
+      "event_refs": [],
+      "holding_refs": [
+        "SYN-ST-0104",
+        "SYN-EQ-0025"
+      ],
+      "rule_refs": [],
+      "snapshot_pair": [],
+      "rm_note": "Client subscribed the shipping and energy FCN. His view is that charter rates stay elevated while the Strait situation is unresolved. Noted that his operating business benefits from the same conditions. He said the point of the Asia portfolio was to be uncorrelated with the Gulf business. It currently is not."
+    },
+    "confidence": "high",
+    "caveats": [],
+    "suggested_action": "Show the aggregated exposure; test whether it still matches the client's stated intent for this money.",
+    "narrative": "20.3% of the book is exposed to 'shipping'. 'shipping' exposure: 20.3 %. Suggested next step: Show the aggregated exposure; test whether it still matches the client's stated intent for this money.",
+    "id": "INS-c984e806",
+    "explained_pct": null,
+    "severity_rank": 2
+  },
+  {
+    "client_id": "CL-0019",
+    "type": "attribution",
+    "severity": "low",
+    "headline": "Portfolio moved 6,631,055 USD \u2014 driven by Emerging Market Sovereign Bond Fund",
+    "contributions": [
+      {
+        "label": "Trading effect (YTD)",
+        "value": 4156210,
+        "unit": "USD",
+        "detail": "Value change from quantity changes 2025-12-31\u21922026-08-26 \u2014 should be ~0 with no trades"
+      },
+      {
+        "label": "Price effect (YTD)",
+        "value": 2484282,
+        "unit": "USD",
+        "detail": "Market price moves on closing quantities 2025-12-31\u21922026-08-26"
+      },
+      {
+        "label": "FX effect (YTD)",
+        "value": -9438,
+        "unit": "USD",
+        "detail": "Currency moves on closing quantities 2025-12-31\u21922026-08-26"
+      },
+      {
+        "label": "Emerging Market Sovereign Bond Fund",
+        "value": -185000,
+        "unit": "USD",
+        "detail": "price effect on this holding"
+      },
+      {
+        "label": "Global Investment Grade Corporate Bond Fund",
+        "value": -153000,
+        "unit": "USD",
+        "detail": "price effect on this holding"
+      },
+      {
+        "label": "USD Call Deposit",
+        "value": 0,
+        "unit": "USD",
+        "detail": "price effect on this holding"
+      }
+    ],
+    "evidence": {
+      "event_refs": [
+        "2026-02-28: United States and Israel commence military operations against Iran.",
+        "2026-06-17: Federal Reserve holds the target range at 3.50-3.75% at the first meet",
+        "2026-06-19: US 10-year Treasury yield rises to about 4.46%, near its highest level"
+      ],
+      "holding_refs": [
+        "SYN-FI-0210",
+        "SYN-FI-0203",
+        "SYN-CA-0601"
+      ],
+      "rule_refs": [],
+      "snapshot_pair": [
+        "2025-12-31",
+        "2026-08-26"
+      ],
+      "rm_note": null
+    },
+    "confidence": "high",
+    "caveats": [
+      "UNEXPLAINED: Tanjong Global Macro Fund moved 259,200 USD on price with no matching event in the log",
+      "UNEXPLAINED: Global Developed Equity Index Fund moved 352,800 USD on price with no matching event in the log",
+      "UNEXPLAINED: US Large Cap Core Fund moved 248,800 USD on price with no matching event in the log",
+      "UNEXPLAINED: Asia ex-Japan Equity Fund moved 58,000 USD on price with no matching event in the log"
+    ],
+    "suggested_action": "Open the meeting on which cashflows fund the next few years without forced sales, not on realising losses.",
+    "narrative": "Portfolio moved 6,631,055 USD \u2014 driven by Emerging Market Sovereign Bond Fund. Trading effect (YTD): 4,156,210 USD. Grounded in: 2026-02-28: United States and Israel commence military operations against Iran.; 2026-06-17: Federal Reserve holds the target range at 3.50-3.75% at the first meet. Suggested next step: Open the meeting on which cashflows fund the next few years without forced sales, not on realising losses.",
+    "id": "INS-e5df635b",
+    "explained_pct": 70.9,
+    "severity_rank": 1
+  }
+]

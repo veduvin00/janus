@@ -11,7 +11,6 @@ from __future__ import annotations
 from src.ingest import DataStore, SNAPSHOTS, TODAY
 from src.schema import Insight, Contribution, Evidence
 from src.engine import attribution, mandate, concentration, collateral, liquidity
-from src.engine.ground import link_events
 from src.engine.narrate import narrate
 
 START = SNAPSHOTS[0]
@@ -19,37 +18,48 @@ START = SNAPSHOTS[0]
 
 # ---------- attribution ----------------------------------------------------------
 def _attribution_insights(store: DataStore, cid: str) -> list[Insight]:
-    eff = attribution.holding_price_effects(store, cid, START, TODAY)
-    if not len(eff):
+    result = attribution.reconcile(store, cid, START, TODAY)
+    if not result["holdings"]:
         return []
-    worst = eff.head(3)
-    total_price = int(eff.price_effect_usd.sum())
-    flows = attribution.net_flows(store, cid, START, TODAY)
+    totals = result["totals"]
+    total_delta = round(totals["delta_usd"])
 
-    # ground the biggest detractor to events
-    top = worst.iloc[0]
-    events = link_events(top, store.events, START, TODAY)
+    worst = sorted(result["holdings"], key=lambda h: h["price_effect"])[:3]
+    top = worst[0]
+    events = result["events_by_instrument"].get(top["instrument_id"], [])
     event_refs = [f"{e['date']}: {e['description'][:70]}" for e in events[:3]]
 
-    contribs = [Contribution("Total price effect (YTD)", total_price, "USD",
-                             f"Sum of price moves on opening quantities {START}→{TODAY}"),
-                Contribution("Net external flows (YTD)", round(flows), "USD",
-                             "Trades, income and withdrawals — not a market move")]
-    for _, r in worst.iterrows():
-        contribs.append(Contribution(r.instrument_name, r.price_effect_usd, "USD",
-                                     f"{r.move_pct}% price move ({r.price_start}→{r.price_end})"))
+    contribs = [
+        Contribution("Trading effect (YTD)", round(totals["trading_effect"]), "USD",
+                     f"Value change from quantity changes {START}→{TODAY} — should be ~0 with no trades"),
+        Contribution("Price effect (YTD)", round(totals["price_effect"]), "USD",
+                     f"Market price moves on closing quantities {START}→{TODAY}"),
+        Contribution("FX effect (YTD)", round(totals["fx_effect"]), "USD",
+                     f"Currency moves on closing quantities {START}→{TODAY}"),
+    ]
+    for h in worst:
+        contribs.append(Contribution(h["instrument_name"], round(h["price_effect"]), "USD",
+                                     "price effect on this holding"))
 
-    sev = "high" if total_price < -1_000_000 else "medium" if total_price < -250_000 else "low"
+    caveats = []
+    for u in result["unexplained"]:
+        if abs(u["price_effect"]) < 1:
+            continue
+        caveats.append(f"UNEXPLAINED: {u['instrument_name']} moved {round(u['price_effect']):,} "
+                       f"USD on price with no matching event in the log")
+
+    sev = "high" if total_delta < -1_000_000 else "medium" if total_delta < -250_000 else "low"
     note = _note_matching(store, cid, ["bond", "loss", "sell", "income", "yield"])
     ins = Insight(
         client_id=cid, type="attribution", severity=sev,
-        headline=f"Portfolio moved {total_price:,} USD on price alone — driven by "
-                 f"{top.instrument_name}",
+        headline=f"Portfolio moved {total_delta:,} USD — driven by {top['instrument_name']}",
         contributions=contribs,
         evidence=Evidence(event_refs=event_refs,
-                          holding_refs=list(worst.instrument_id),
+                          holding_refs=[h["instrument_id"] for h in worst],
                           snapshot_pair=[START, TODAY], rm_note=note),
         confidence="high",
+        caveats=caveats,
+        explained_pct=result["explained_pct"],
         suggested_action="Open the meeting on which cashflows fund the next few years "
                           "without forced sales, not on realising losses.",
     )

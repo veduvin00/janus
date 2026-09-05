@@ -38,8 +38,14 @@ INSTRUMENT_TAGS = {
     "shipping": "shipping", "marine": "shipping", "tanker": "shipping",
     "technology": "technology", "cloud": "technology",
     "semiconductor": "technology", "software": "technology",
-    # duration / rate-sensitive fixed income
-    "perpetual": "duration", "treasury": "duration", "sovereign": "duration",
+    # duration / rate-sensitive fixed income — NOT "perpetual": a perpetual coupon
+    # structure means indefinite life, not automatic rate-sensitivity. A subordinated
+    # perpetual's price can move on issuer/sector credit stress with zero curve
+    # linkage (see Golden Harbour Properties vs Pacific Rim Bank in CL-0012's book —
+    # same "perpetual" wording, unrelated drivers). Duration risk is asserted only
+    # for instruments that are actually government/IG debt, or explicitly long-dated
+    # (see LONG_DURATION_YEAR below).
+    "treasury": "duration", "sovereign": "duration",
     "investment grade": "duration", "corporate bond": "duration",
     # genuine EM / Asia credit only — not every bond fund
     "emerging market": "em_credit", "asia investment grade": "em_credit",

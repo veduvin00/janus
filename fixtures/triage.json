@@ -1,0 +1,1112 @@
+[
+  {
+    "client_id": "CL-0017",
+    "client_name": "Fong Enterprises Family Office",
+    "score": 267.6,
+    "n_insights": 12,
+    "top_reason": "PF-0019 Equity is 56.2% \u2014 above its 55% mandate limit",
+    "contributions": [
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "PF-0019 Equity is 56.2% \u2014 above its 55% mandate limit",
+        "insight_id": "INS-6ef3a061"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "Global Developed Equity Index Fund is 22.8% of PF-0019 \u2014 over the 12.0% single-position limit",
+        "insight_id": "INS-c6d73f2d"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "US Large Cap Core Fund is 14.3% of PF-0019 \u2014 over the 12.0% single-position limit",
+        "insight_id": "INS-0f25eb44"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "Global Investment Grade Corporate Bond Fund is 14.0% of PF-0019 \u2014 over the 12.0% single-position limit",
+        "insight_id": "INS-a42cb7c4"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "Meridian Private Equity Fund VII is 35.3% of PF-0020 \u2014 over the 25.0% single-position limit",
+        "insight_id": "INS-054dd350"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "Orchard Private Credit Fund II is 28.0% of PF-0020 \u2014 over the 25.0% single-position limit",
+        "insight_id": "INS-90ac85c6"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "PF-0021 Cash and Equivalents is 15.9% \u2014 above its 12% mandate limit",
+        "insight_id": "INS-c898c83e"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "US Technology Leaders Fund is 29.8% of PF-0021 \u2014 over the 15.0% single-position limit",
+        "insight_id": "INS-76296093"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "Short Duration USD Bond Fund is 21.3% of PF-0021 \u2014 over the 15.0% single-position limit",
+        "insight_id": "INS-90d599ab"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "USD Money Market Fund is 15.9% of PF-0021 \u2014 over the 15.0% single-position limit",
+        "insight_id": "INS-75add1fd"
+      },
+      {
+        "type": "liquidity",
+        "severity": "medium",
+        "points": 14.4,
+        "headline": "Near-term demands of 32,500,000 USD against 54,624,980 USD of readily sellable assets",
+        "insight_id": "INS-62e28128"
+      },
+      {
+        "type": "attribution",
+        "severity": "low",
+        "points": 3.2,
+        "headline": "Portfolio moved 2,402,140 USD \u2014 driven by Orchard Private Credit Fund II",
+        "insight_id": "INS-480af6fb"
+      }
+    ],
+    "rank": 1
+  },
+  {
+    "client_id": "CL-0014",
+    "client_name": "Lau Chi Ming",
+    "score": 232.5,
+    "n_insights": 9,
+    "top_reason": "CF-0002 LTV is 69.41% vs a 70.0% margin-call trigger (0.6 pts of headroom)",
+    "contributions": [
+      {
+        "type": "collateral",
+        "severity": "high",
+        "points": 32.5,
+        "headline": "CF-0002 LTV is 69.41% vs a 70.0% margin-call trigger (0.6 pts of headroom)",
+        "insight_id": "INS-9dea2961"
+      },
+      {
+        "type": "liquidity",
+        "severity": "high",
+        "points": 30.0,
+        "headline": "Near-term demands of 60,000,000 USD against 19,437,114 USD of readily sellable assets",
+        "insight_id": "INS-6274fe2f"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "PF-0016 Equity is 23.4% \u2014 below its 30% mandate limit",
+        "insight_id": "INS-553460ac"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "Golden Harbour Properties 5.25% Perpetual is 12.9% of PF-0016 \u2014 over the 12.0% single-position limit",
+        "insight_id": "INS-e11dc297"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "Pacific Rim Bank 4.75% Perpetual is 17.6% of PF-0016 \u2014 over the 12.0% single-position limit",
+        "insight_id": "INS-d32dbbc0"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "Greater China Equity Fund is 13.8% of PF-0016 \u2014 over the 12.0% single-position limit",
+        "insight_id": "INS-bf3b6a06"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "Asia High Yield Bond Fund is 13.8% of PF-0016 \u2014 over the 12.0% single-position limit",
+        "insight_id": "INS-c45c3e06"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "Direct Property - Mid-Levels Apartment is 19.6% of PF-0016 \u2014 over the 12.0% single-position limit",
+        "insight_id": "INS-180274d6"
+      },
+      {
+        "type": "attribution",
+        "severity": "high",
+        "points": 20.0,
+        "headline": "Portfolio moved -1,692,845 USD \u2014 driven by Golden Harbour Properties 5.25% Perpetual",
+        "insight_id": "INS-95c78d63"
+      }
+    ],
+    "rank": 2
+  },
+  {
+    "client_id": "CL-0011",
+    "client_name": "Tan Boon Huat",
+    "score": 207.0,
+    "n_insights": 9,
+    "top_reason": "PF-0013 Fixed Income is 24.5% \u2014 below its 45% mandate limit",
+    "contributions": [
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "PF-0013 Fixed Income is 24.5% \u2014 below its 45% mandate limit",
+        "insight_id": "INS-c1b649bd"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "PF-0013 Alternatives is 47.3% \u2014 above its 15% mandate limit",
+        "insight_id": "INS-ca7b4cf4"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "Direct Property - Sentosa Cove Residence is 18.3% of PF-0013 \u2014 over the 10.0% single-position limit",
+        "insight_id": "INS-9e6582ce"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "Asia Real Estate Opportunity Fund III is 20.4% of PF-0013 \u2014 over the 10.0% single-position limit",
+        "insight_id": "INS-5412975b"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "Singapore REIT Income Fund is 12.7% of PF-0013 \u2014 over the 10.0% single-position limit",
+        "insight_id": "INS-b61b76fc"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "Singapore Government Securities 2.75% due 2036 is 13.5% of PF-0013 \u2014 over the 10.0% single-position limit",
+        "insight_id": "INS-56a6ccb1"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "Global Investment Grade Corporate Bond Fund is 11.0% of PF-0013 \u2014 over the 10.0% single-position limit",
+        "insight_id": "INS-c6ad5628"
+      },
+      {
+        "type": "attribution",
+        "severity": "high",
+        "points": 20.0,
+        "headline": "Portfolio moved -2,551,080 USD \u2014 driven by Asia Real Estate Opportunity Fund III",
+        "insight_id": "INS-208ebff5"
+      },
+      {
+        "type": "concentration",
+        "severity": "medium",
+        "points": 12.0,
+        "headline": "24.5% of the book is exposed to 'duration'",
+        "insight_id": "INS-2671de84"
+      }
+    ],
+    "rank": 3
+  },
+  {
+    "client_id": "CL-0002",
+    "client_name": "Ravi Chandrasekaran",
+    "score": 196.7,
+    "n_insights": 10,
+    "top_reason": "CF-0001 LTV is 73.71% vs a 75.0% margin-call trigger (1.3 pts of headroom)",
+    "contributions": [
+      {
+        "type": "collateral",
+        "severity": "high",
+        "points": 32.5,
+        "headline": "CF-0001 LTV is 73.71% vs a 75.0% margin-call trigger (1.3 pts of headroom)",
+        "insight_id": "INS-e2e853b7"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "PF-0004 Cash and Equivalents is 0.0% \u2014 below its 1% mandate limit",
+        "insight_id": "INS-3dbda477"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "PF-0004 Fixed Income is 0.0% \u2014 below its 5% mandate limit",
+        "insight_id": "INS-2cb92b0a"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "PF-0004 Equity is 0.0% \u2014 below its 50% mandate limit",
+        "insight_id": "INS-555b6ed7"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "PF-0004 Alternatives is 100.0% \u2014 above its 30% mandate limit",
+        "insight_id": "INS-e3b77cad"
+      },
+      {
+        "type": "concentration",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "88.6% of the book is exposed to 'technology' across 2 portfolios",
+        "insight_id": "INS-d4aaf18a"
+      },
+      {
+        "type": "mandate",
+        "severity": "medium",
+        "points": 12.0,
+        "headline": "US Technology Leaders Fund is 24.0% of PF-0003 \u2014 over the 15.0% single-position limit",
+        "insight_id": "INS-37cffbf5"
+      },
+      {
+        "type": "mandate",
+        "severity": "medium",
+        "points": 12.0,
+        "headline": "Meridian Semiconductor Corp is 15.2% of PF-0003 \u2014 over the 15.0% single-position limit",
+        "insight_id": "INS-371ecdac"
+      },
+      {
+        "type": "mandate",
+        "severity": "medium",
+        "points": 12.0,
+        "headline": "Unlisted Holding - Aranya Technologies Pte Ltd is 100.0% of PF-0004 \u2014 over the 15.0% single-position limit",
+        "insight_id": "INS-13d25e63"
+      },
+      {
+        "type": "attribution",
+        "severity": "low",
+        "points": 3.2,
+        "headline": "Portfolio moved 2,902,700 USD \u2014 driven by USD Call Deposit",
+        "insight_id": "INS-c8918288"
+      }
+    ],
+    "rank": 4
+  },
+  {
+    "client_id": "CL-0016",
+    "client_name": "Yamamoto Kenji",
+    "score": 183.2,
+    "n_insights": 8,
+    "top_reason": "Near-term demands of 18,000,000 USD against 14,508,067 USD of readily sellable assets",
+    "contributions": [
+      {
+        "type": "liquidity",
+        "severity": "high",
+        "points": 30.0,
+        "headline": "Near-term demands of 18,000,000 USD against 14,508,067 USD of readily sellable assets",
+        "insight_id": "INS-687ebd0d"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "PF-0018 Fixed Income is 21.8% \u2014 below its 25% mandate limit",
+        "insight_id": "INS-a7a6623d"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "PF-0018 Equity is 67.7% \u2014 above its 55% mandate limit",
+        "insight_id": "INS-ff00e8c9"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "Kanto Pharma Holdings KK is 20.1% of PF-0018 \u2014 over the 12.0% single-position limit",
+        "insight_id": "INS-049da298"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "Japan Equity Fund is 15.7% of PF-0018 \u2014 over the 12.0% single-position limit",
+        "insight_id": "INS-0a212d58"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "Global Developed Equity Index Fund is 14.8% of PF-0018 \u2014 over the 12.0% single-position limit",
+        "insight_id": "INS-885b604c"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "Global Investment Grade Corporate Bond Fund is 13.4% of PF-0018 \u2014 over the 12.0% single-position limit",
+        "insight_id": "INS-e3e21739"
+      },
+      {
+        "type": "attribution",
+        "severity": "low",
+        "points": 3.2,
+        "headline": "Portfolio moved 394,824 USD \u2014 driven by Global Investment Grade Corporate Bond Fund",
+        "insight_id": "INS-f3e7e659"
+      }
+    ],
+    "rank": 5
+  },
+  {
+    "client_id": "CL-0018",
+    "client_name": "Elena Marchetti-Wong",
+    "score": 171.6,
+    "n_insights": 8,
+    "top_reason": "PF-0022 Fixed Income is 23.0% \u2014 below its 25% mandate limit",
+    "contributions": [
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "PF-0022 Fixed Income is 23.0% \u2014 below its 25% mandate limit",
+        "insight_id": "INS-598a08f4"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "PF-0022 Commodities is 14.0% \u2014 above its 10% mandate limit",
+        "insight_id": "INS-bec31734"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "Global Luxury and Consumer Brands Fund is 16.3% of PF-0022 \u2014 over the 12.0% single-position limit",
+        "insight_id": "INS-e88fab9b"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "European Equity Fund is 13.4% of PF-0022 \u2014 over the 12.0% single-position limit",
+        "insight_id": "INS-7ea93563"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "Global Developed Equity Index Fund is 12.6% of PF-0022 \u2014 over the 12.0% single-position limit",
+        "insight_id": "INS-12658e13"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "EUR Investment Grade Bond Fund is 14.4% of PF-0022 \u2014 over the 12.0% single-position limit",
+        "insight_id": "INS-dd83de2c"
+      },
+      {
+        "type": "concentration",
+        "severity": "medium",
+        "points": 12.0,
+        "headline": "23.0% of the book is exposed to 'duration'",
+        "insight_id": "INS-13889f79"
+      },
+      {
+        "type": "attribution",
+        "severity": "medium",
+        "points": 9.6,
+        "headline": "Portfolio moved -939,313 USD \u2014 driven by Global Luxury and Consumer Brands Fund",
+        "insight_id": "INS-a487cdb7"
+      }
+    ],
+    "rank": 6
+  },
+  {
+    "client_id": "CL-0003",
+    "client_name": "Margarethe Voss-Brenner",
+    "score": 170.0,
+    "n_insights": 7,
+    "top_reason": "PF-0005 Fixed Income is 9.1% \u2014 below its 45% mandate limit",
+    "contributions": [
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "PF-0005 Fixed Income is 9.1% \u2014 below its 45% mandate limit",
+        "insight_id": "INS-03a15d0b"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "PF-0005 Equity is 71.5% \u2014 above its 30% mandate limit",
+        "insight_id": "INS-e61d0f13"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "Global Luxury and Consumer Brands Fund is 26.1% of PF-0005 \u2014 over the 10.0% single-position limit",
+        "insight_id": "INS-ca974cc4"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "Nordvind Industrial AB is 18.4% of PF-0005 \u2014 over the 10.0% single-position limit",
+        "insight_id": "INS-5125e5e0"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "European Equity Fund is 16.3% of PF-0005 \u2014 over the 10.0% single-position limit",
+        "insight_id": "INS-f9a2256e"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "US Technology Leaders Fund is 10.7% of PF-0005 \u2014 over the 10.0% single-position limit",
+        "insight_id": "INS-1c44c910"
+      },
+      {
+        "type": "attribution",
+        "severity": "high",
+        "points": 20.0,
+        "headline": "Portfolio moved -1,335,842 USD \u2014 driven by Global Luxury and Consumer Brands Fund",
+        "insight_id": "INS-67be445a"
+      }
+    ],
+    "rank": 7
+  },
+  {
+    "client_id": "CL-0004",
+    "client_name": "Chalermchai Suphanburi",
+    "score": 157.0,
+    "n_insights": 7,
+    "top_reason": "US Treasury 2.375% due 2045 is 15.7% of PF-0006 \u2014 over the 10.0% single-position limit",
+    "contributions": [
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "US Treasury 2.375% due 2045 is 15.7% of PF-0006 \u2014 over the 10.0% single-position limit",
+        "insight_id": "INS-3c1cdf42"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "Global Investment Grade Corporate Bond Fund is 16.0% of PF-0006 \u2014 over the 10.0% single-position limit",
+        "insight_id": "INS-b5fcc79e"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "Asia Investment Grade Credit Fund is 14.0% of PF-0006 \u2014 over the 10.0% single-position limit",
+        "insight_id": "INS-56834ef6"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "Pacific Rim Bank 4.75% Perpetual is 11.4% of PF-0006 \u2014 over the 10.0% single-position limit",
+        "insight_id": "INS-9cd3cd66"
+      },
+      {
+        "type": "concentration",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "53.3% of the book is exposed to 'duration'",
+        "insight_id": "INS-15468b12"
+      },
+      {
+        "type": "attribution",
+        "severity": "high",
+        "points": 20.0,
+        "headline": "Portfolio moved -2,366,564 USD \u2014 driven by US Treasury 2.375% due 2045",
+        "insight_id": "INS-801b848c"
+      },
+      {
+        "type": "concentration",
+        "severity": "medium",
+        "points": 12.0,
+        "headline": "21.7% of the book is exposed to 'em_credit'",
+        "insight_id": "INS-c60b4bcd"
+      }
+    ],
+    "rank": 8
+  },
+  {
+    "client_id": "CL-0001",
+    "client_name": "Hartono Wijaya Kusuma",
+    "score": 153.2,
+    "n_insights": 7,
+    "top_reason": "Global Developed Equity Index Fund is 26.6% of PF-0001 \u2014 over the 15.0% single-position limit",
+    "contributions": [
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "Global Developed Equity Index Fund is 26.6% of PF-0001 \u2014 over the 15.0% single-position limit",
+        "insight_id": "INS-c2ad9f57"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "Asia Investment Grade Credit Fund is 15.7% of PF-0001 \u2014 over the 15.0% single-position limit",
+        "insight_id": "INS-e2c84579"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "PF-0002 Fixed Income is 0.0% \u2014 below its 15% mandate limit",
+        "insight_id": "INS-25723f8b"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "PF-0002 Equity is 98.0% \u2014 above its 65% mandate limit",
+        "insight_id": "INS-1725a726"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "Bara Nusantara Energy Tbk is 98.0% of PF-0002 \u2014 over the 15.0% single-position limit",
+        "insight_id": "INS-18a0f897"
+      },
+      {
+        "type": "concentration",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "41.4% of the book is exposed to 'energy'",
+        "insight_id": "INS-e531e3e1"
+      },
+      {
+        "type": "attribution",
+        "severity": "low",
+        "points": 3.2,
+        "headline": "Portfolio moved 7,005,973 USD \u2014 driven by Asia Investment Grade Credit Fund",
+        "insight_id": "INS-abec4ab0"
+      }
+    ],
+    "rank": 9
+  },
+  {
+    "client_id": "CL-0010",
+    "client_name": "Priya Nair Menon",
+    "score": 153.2,
+    "n_insights": 7,
+    "top_reason": "Global Healthcare Equity Fund is 12.2% of PF-0012 \u2014 over the 12.0% single-position limit",
+    "contributions": [
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "Global Healthcare Equity Fund is 12.2% of PF-0012 \u2014 over the 12.0% single-position limit",
+        "insight_id": "INS-a7dbd0a8"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "Global Listed Infrastructure Fund is 13.7% of PF-0012 \u2014 over the 12.0% single-position limit",
+        "insight_id": "INS-a717efac"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "Global Developed Equity Index Fund is 14.5% of PF-0012 \u2014 over the 12.0% single-position limit",
+        "insight_id": "INS-ce4a8b35"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "Singapore Government Securities 2.75% due 2036 is 21.6% of PF-0012 \u2014 over the 12.0% single-position limit",
+        "insight_id": "INS-501fd917"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "Global Inflation-Linked Bond Fund is 15.2% of PF-0012 \u2014 over the 12.0% single-position limit",
+        "insight_id": "INS-dc300bb2"
+      },
+      {
+        "type": "concentration",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "36.7% of the book is exposed to 'duration'",
+        "insight_id": "INS-90b996b8"
+      },
+      {
+        "type": "attribution",
+        "severity": "low",
+        "points": 3.2,
+        "headline": "Portfolio moved 90,200 USD \u2014 driven by Singapore Government Securities 2.75% due 2036",
+        "insight_id": "INS-eaf00c51"
+      }
+    ],
+    "rank": 10
+  },
+  {
+    "client_id": "CL-0005",
+    "client_name": "Aishah binti Rahman",
+    "score": 140.2,
+    "n_insights": 7,
+    "top_reason": "PF-0007 Equity is 67.7% \u2014 above its 55% mandate limit",
+    "contributions": [
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "PF-0007 Equity is 67.7% \u2014 above its 55% mandate limit",
+        "insight_id": "INS-3de87abe"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "Global Developed Equity Index Fund is 14.7% of PF-0007 \u2014 over the 12.0% single-position limit",
+        "insight_id": "INS-950cd70f"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "Global Healthcare Equity Fund is 12.8% of PF-0007 \u2014 over the 12.0% single-position limit",
+        "insight_id": "INS-d15c23c8"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "Singapore Government Securities 2.75% due 2036 is 14.0% of PF-0007 \u2014 over the 12.0% single-position limit",
+        "insight_id": "INS-5638b771"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "Global Investment Grade Corporate Bond Fund is 12.5% of PF-0007 \u2014 over the 12.0% single-position limit",
+        "insight_id": "INS-7102c95e"
+      },
+      {
+        "type": "concentration",
+        "severity": "medium",
+        "points": 12.0,
+        "headline": "26.5% of the book is exposed to 'duration'",
+        "insight_id": "INS-7e909a8f"
+      },
+      {
+        "type": "attribution",
+        "severity": "low",
+        "points": 3.2,
+        "headline": "Portfolio moved 551,097 USD \u2014 driven by Singapore Government Securities 2.75% due 2036",
+        "insight_id": "INS-551e4297"
+      }
+    ],
+    "rank": 11
+  },
+  {
+    "client_id": "CL-0006",
+    "client_name": "Nguyen Thi Bao Tran",
+    "score": 133.4,
+    "n_insights": 7,
+    "top_reason": "Singapore Government Securities 2.75% due 2036 is 22.5% of PF-0008 \u2014 over the 12.0% single-position limit",
+    "contributions": [
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "Singapore Government Securities 2.75% due 2036 is 22.5% of PF-0008 \u2014 over the 12.0% single-position limit",
+        "insight_id": "INS-fff521f5"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "ASEAN Equity Fund is 14.2% of PF-0008 \u2014 over the 12.0% single-position limit",
+        "insight_id": "INS-69b012d7"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "Singapore REIT Income Fund is 13.5% of PF-0008 \u2014 over the 12.0% single-position limit",
+        "insight_id": "INS-f5947e31"
+      },
+      {
+        "type": "attribution",
+        "severity": "high",
+        "points": 20.0,
+        "headline": "Portfolio moved -1,172,997 USD \u2014 driven by Singapore Government Securities 2.75% due 2036",
+        "insight_id": "INS-97fa4584"
+      },
+      {
+        "type": "liquidity",
+        "severity": "medium",
+        "points": 14.4,
+        "headline": "Near-term demands of 11,000,000 USD against 12,508,972 USD of readily sellable assets",
+        "insight_id": "INS-59460087"
+      },
+      {
+        "type": "concentration",
+        "severity": "medium",
+        "points": 12.0,
+        "headline": "29.0% of the book is exposed to 'duration'",
+        "insight_id": "INS-383d544b"
+      },
+      {
+        "type": "concentration",
+        "severity": "medium",
+        "points": 12.0,
+        "headline": "20.8% of the book is exposed to 'em_credit'",
+        "insight_id": "INS-a95433c7"
+      }
+    ],
+    "rank": 12
+  },
+  {
+    "client_id": "CL-0009",
+    "client_name": "Andreas Lindqvist",
+    "score": 120.0,
+    "n_insights": 5,
+    "top_reason": "PF-0011 Cash and Equivalents is 45.0% \u2014 above its 18% mandate limit",
+    "contributions": [
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "PF-0011 Cash and Equivalents is 45.0% \u2014 above its 18% mandate limit",
+        "insight_id": "INS-3c166cef"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "PF-0011 Fixed Income is 14.5% \u2014 below its 25% mandate limit",
+        "insight_id": "INS-8c30b201"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "EUR Call Deposit is 33.9% of PF-0011 \u2014 over the 12.0% single-position limit",
+        "insight_id": "INS-6d62eef6"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "Nordvind Industrial AB is 17.2% of PF-0011 \u2014 over the 12.0% single-position limit",
+        "insight_id": "INS-7d39826a"
+      },
+      {
+        "type": "attribution",
+        "severity": "high",
+        "points": 20.0,
+        "headline": "Portfolio moved -1,322,519 USD \u2014 driven by EUR Investment Grade Bond Fund",
+        "insight_id": "INS-cf723e70"
+      }
+    ],
+    "rank": 13
+  },
+  {
+    "client_id": "CL-0012",
+    "client_name": "Cheung Kwok Wing",
+    "score": 120.0,
+    "n_insights": 5,
+    "top_reason": "US Treasury 2.375% due 2045 is 20.8% of PF-0014 \u2014 over the 10.0% single-position limit",
+    "contributions": [
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "US Treasury 2.375% due 2045 is 20.8% of PF-0014 \u2014 over the 10.0% single-position limit",
+        "insight_id": "INS-9e3e5ac0"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "Global Investment Grade Corporate Bond Fund is 16.7% of PF-0014 \u2014 over the 10.0% single-position limit",
+        "insight_id": "INS-d733a27d"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "Asia Investment Grade Credit Fund is 15.1% of PF-0014 \u2014 over the 10.0% single-position limit",
+        "insight_id": "INS-6e38c979"
+      },
+      {
+        "type": "concentration",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "52.5% of the book is exposed to 'duration'",
+        "insight_id": "INS-360c2668"
+      },
+      {
+        "type": "attribution",
+        "severity": "high",
+        "points": 20.0,
+        "headline": "Portfolio moved -2,102,157 USD \u2014 driven by US Treasury 2.375% due 2045",
+        "insight_id": "INS-77ba174c"
+      }
+    ],
+    "rank": 14
+  },
+  {
+    "client_id": "CL-0008",
+    "client_name": "Chen Wei Ling",
+    "score": 103.2,
+    "n_insights": 5,
+    "top_reason": "Global Developed Equity Index Fund is 15.9% of PF-0010 \u2014 over the 12.0% single-position limit",
+    "contributions": [
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "Global Developed Equity Index Fund is 15.9% of PF-0010 \u2014 over the 12.0% single-position limit",
+        "insight_id": "INS-55fd6b44"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "Singapore Government Securities 2.75% due 2036 is 17.0% of PF-0010 \u2014 over the 12.0% single-position limit",
+        "insight_id": "INS-5a448ad9"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "Short Duration USD Bond Fund is 15.3% of PF-0010 \u2014 over the 12.0% single-position limit",
+        "insight_id": "INS-df68ebba"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "SGD Fixed Deposit 3M is 13.6% of PF-0010 \u2014 over the 12.0% single-position limit",
+        "insight_id": "INS-2be6e72f"
+      },
+      {
+        "type": "attribution",
+        "severity": "low",
+        "points": 3.2,
+        "headline": "Portfolio moved -187,147 USD \u2014 driven by Singapore Government Securities 2.75% due 2036",
+        "insight_id": "INS-4dfab3fb"
+      }
+    ],
+    "rank": 15
+  },
+  {
+    "client_id": "CL-0013",
+    "client_name": "Zhang Meiling",
+    "score": 78.2,
+    "n_insights": 4,
+    "top_reason": "US Technology Leaders Fund is 22.4% of PF-0015 \u2014 over the 15.0% single-position limit",
+    "contributions": [
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "US Technology Leaders Fund is 22.4% of PF-0015 \u2014 over the 15.0% single-position limit",
+        "insight_id": "INS-ff1e9e88"
+      },
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "Helios Cloud Systems Inc is 15.4% of PF-0015 \u2014 over the 15.0% single-position limit",
+        "insight_id": "INS-7444f52b"
+      },
+      {
+        "type": "concentration",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "57.1% of the book is exposed to 'technology'",
+        "insight_id": "INS-f2c9e009"
+      },
+      {
+        "type": "attribution",
+        "severity": "low",
+        "points": 3.2,
+        "headline": "Portfolio moved 5,786,691 USD \u2014 driven by USD Call Deposit",
+        "insight_id": "INS-a1eb8eea"
+      }
+    ],
+    "rank": 16
+  },
+  {
+    "client_id": "CL-0007",
+    "client_name": "Alistair Pemberton-Hale",
+    "score": 76.2,
+    "n_insights": 6,
+    "top_reason": "PF-0009 Commodities is 18.9% \u2014 above its 10% mandate limit",
+    "contributions": [
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "PF-0009 Commodities is 18.9% \u2014 above its 10% mandate limit",
+        "insight_id": "INS-7ca1f16f"
+      },
+      {
+        "type": "mandate",
+        "severity": "medium",
+        "points": 12.0,
+        "headline": "Global Developed Equity Index Fund is 13.1% of PF-0009 \u2014 over the 12.0% single-position limit",
+        "insight_id": "INS-01d2d55e"
+      },
+      {
+        "type": "mandate",
+        "severity": "medium",
+        "points": 12.0,
+        "headline": "US Treasury 4.125% due 2028 is 12.4% of PF-0009 \u2014 over the 12.0% single-position limit",
+        "insight_id": "INS-d5d34b5a"
+      },
+      {
+        "type": "concentration",
+        "severity": "medium",
+        "points": 12.0,
+        "headline": "29.0% of the book is exposed to 'duration'",
+        "insight_id": "INS-49d0cb10"
+      },
+      {
+        "type": "concentration",
+        "severity": "medium",
+        "points": 12.0,
+        "headline": "24.0% of the book is exposed to 'gold'",
+        "insight_id": "INS-79da9749"
+      },
+      {
+        "type": "attribution",
+        "severity": "low",
+        "points": 3.2,
+        "headline": "Portfolio moved 2,908,908 USD \u2014 driven by Global Investment Grade Corporate Bond Fund",
+        "insight_id": "INS-aaa824ce"
+      }
+    ],
+    "rank": 17
+  },
+  {
+    "client_id": "CL-0020",
+    "client_name": "Grace Adeyemi-Lim",
+    "score": 28.2,
+    "n_insights": 2,
+    "top_reason": "Global Healthcare Equity Fund is 17.4% of PF-0024 \u2014 over the 15.0% single-position limit",
+    "contributions": [
+      {
+        "type": "mandate",
+        "severity": "high",
+        "points": 25.0,
+        "headline": "Global Healthcare Equity Fund is 17.4% of PF-0024 \u2014 over the 15.0% single-position limit",
+        "insight_id": "INS-cf1f1ed8"
+      },
+      {
+        "type": "attribution",
+        "severity": "low",
+        "points": 3.2,
+        "headline": "Portfolio moved 996,108 USD \u2014 driven by Global Investment Grade Corporate Bond Fund",
+        "insight_id": "INS-08cce969"
+      }
+    ],
+    "rank": 18
+  },
+  {
+    "client_id": "CL-0019",
+    "client_name": "Abdullah Al-Mansoori",
+    "score": 27.2,
+    "n_insights": 3,
+    "top_reason": "21.7% of the book is exposed to 'em_credit'",
+    "contributions": [
+      {
+        "type": "concentration",
+        "severity": "medium",
+        "points": 12.0,
+        "headline": "21.7% of the book is exposed to 'em_credit'",
+        "insight_id": "INS-16547408"
+      },
+      {
+        "type": "concentration",
+        "severity": "medium",
+        "points": 12.0,
+        "headline": "20.3% of the book is exposed to 'shipping'",
+        "insight_id": "INS-c984e806"
+      },
+      {
+        "type": "attribution",
+        "severity": "low",
+        "points": 3.2,
+        "headline": "Portfolio moved 6,631,055 USD \u2014 driven by Emerging Market Sovereign Bond Fund",
+        "insight_id": "INS-e5df635b"
+      }
+    ],
+    "rank": 19
+  },
+  {
+    "client_id": "CL-0015",
+    "client_name": "Kim Do-Yoon",
+    "score": 15.2,
+    "n_insights": 2,
+    "top_reason": "29.7% of the book is exposed to 'technology'",
+    "contributions": [
+      {
+        "type": "concentration",
+        "severity": "medium",
+        "points": 12.0,
+        "headline": "29.7% of the book is exposed to 'technology'",
+        "insight_id": "INS-645a8d3f"
+      },
+      {
+        "type": "attribution",
+        "severity": "low",
+        "points": 3.2,
+        "headline": "Portfolio moved 3,021,410 USD \u2014 driven by USD Call Deposit",
+        "insight_id": "INS-d0b90d36"
+      }
+    ],
+    "rank": 20
+  }
+]

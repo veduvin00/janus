@@ -36,8 +36,6 @@ def instrument_tags(row: pd.Series) -> set[str]:
     m = re.search(r"(20\d\d)", str(row.get("instrument_name", "")))
     if m and int(m.group(1)) >= LONG_DURATION_YEAR:
         tags.add("duration")
-    if "perpetual" in str(row.get("instrument_name", "")).lower():
-        tags.add("duration")
     return tags
 
 

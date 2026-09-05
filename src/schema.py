@@ -62,6 +62,7 @@ class Insight:
     suggested_action: str = ""
     narrative: str = ""            # filled by narrate.py, FROM the fields above only
     id: str = ""
+    explained_pct: float | None = None   # attribution only: % of |price_effect| grounded to an event
 
     def __post_init__(self):
         if not self.id:

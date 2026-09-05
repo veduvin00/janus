@@ -23,6 +23,8 @@ Guardrail-relevant design choices:
 from __future__ import annotations
 import os
 
+from src.ingest import DataStore, TODAY
+
 MODEL = "gpt-4o"
 
 # Reputable financial press only. Explicitly NOT social media, forums, or
@@ -36,7 +38,7 @@ ALLOWED_NEWS_DOMAINS = [
 SYSTEM_PROMPT = (
     "You are a market-context lookup for a private-bank Relationship Manager. "
     "Use the web_search tool (restricted to reputable financial press) to "
-    "summarize CURRENT reporting relevant to the query below.\n\n"
+    "summarize reporting relevant to the query below.\n\n"
     "STRICT RULES:\n"
     "1. Use only information returned by web_search this turn. Cite the "
     "publication and headline for every claim.\n"
@@ -45,10 +47,70 @@ SYSTEM_PROMPT = (
     "3. This is background color only — NOT investment advice, and NOT a "
     "restatement of the bank's own computed portfolio numbers. You were not "
     "given any client data; do not invent or imply any.\n"
-    "4. If search finds nothing relevant, say so plainly rather than padding "
-    "the answer.\n\n"
+    "4. 'Relevant' means anything from roughly the past 12 months, not just "
+    "the last few days — don't discard a good match merely for not being "
+    "brand-new. Only say search found nothing if that's true across the "
+    "whole past year.\n\n"
     "Answer in 2-4 sentences, plain prose, then list your sources."
 )
+
+
+def build_query(store: DataStore, client_id: str, insight) -> str:
+    """Build a real-world-themed search query from a computed Insight.
+
+    This dataset is synthetic: instrument names ("Golden Harbour Properties"),
+    event descriptions, even the Fed chair, are fictional for the demo. Searching
+    real news for that literal text, or for the bank's internal phrasing (e.g.
+    "PF-0004 Cash and Equivalents is 0.0% — below its 1% mandate limit"), will
+    always come back empty — neither exists in the real world. What DOES exist
+    in the real world is the sector/region/asset-class each synthetic holding
+    stands in for, so that's what we search on instead.
+
+    Attribution/concentration insights carry evidence.holding_refs (specific
+    instruments); mandate/liquidity/collateral insights don't (build.py only
+    sets rule_refs for those), so we fall back to the client's whole book —
+    still a real sector/region exposure, just not the one specific insight.
+    """
+    themes, seen = [], set()
+
+    def _theme(sector, region):
+        sector = sector or None
+        region = region or None
+        key = (sector, region)
+        if key == (None, None) or key in seen:
+            return
+        seen.add(key)
+        themes.append(f"{sector or 'diversified assets'} in {region or 'global markets'}")
+
+    for iid in (insight.evidence.holding_refs or []):
+        row = store.instruments[store.instruments.instrument_id == iid]
+        if len(row):
+            r = row.iloc[0]
+            _theme(r.get("sector"), r.get("region"))
+
+    if not themes:
+        book = store.holdings_of(client_id, snapshot=TODAY)
+        if len(book):
+            top = (book.groupby(["sector", "region"], dropna=False)["market_value_usd"]
+                       .sum().sort_values(ascending=False).head(3))
+            for sector, region in top.index:
+                _theme(sector, region)
+
+    if not themes:
+        return insight.headline  # nothing real-world to anchor on — last resort
+
+    client = store.client(client_id)
+    residence = client.get("country_of_residence")
+    residence_bit = f" Client is based in {residence}." if residence else ""
+
+    # Keep this plain and direct — a query padded with meta-commentary about
+    # "synthetic holdings" measurably derails the search (tested: the same
+    # themes phrased as a direct query returned five well-cited Bloomberg
+    # results; wrapped in disclaimers, it returned nothing).
+    return (
+        f"Current market, economic, and geopolitical news relevant to: "
+        f"{'; '.join(themes[:4])}.{residence_bit}"
+    )
 
 
 def get_market_context(query: str) -> dict | None:

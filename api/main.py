@@ -23,7 +23,7 @@ from src.ingest import get_store
 from src.build import build_client_insights
 from src.engine.prioritise import build_triage
 from src.engine.narrate.chat import ask_why
-from src.engine.narrate.market_context import get_market_context
+from src.engine.narrate.market_context import get_market_context, build_query
 
 app = FastAPI(title="JB Wealth Intelligence — RM Workbench API")
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"],
@@ -95,7 +95,8 @@ def chat(cid: str, req: ChatRequest):
 
 
 class MarketContextRequest(BaseModel):
-    query: str
+    query: str | None = None
+    insight_id: str | None = None
 
 
 @app.post("/clients/{cid}/market-context")
@@ -103,11 +104,26 @@ def market_context(cid: str, req: MarketContextRequest):
     """Deliberately NOT grounded in this client's data — see
     src/engine/narrate/market_context.py. Live web search restricted to
     reputable financial press, quarantined from the Insight pipeline: never
-    feeds contributions, explained_pct, or suggested_action."""
+    feeds contributions, explained_pct, or suggested_action.
+
+    Pass insight_id (preferred) to have the query built server-side from that
+    insight's real-world sector/region themes rather than this demo's
+    synthetic instrument names or internal phrasing, neither of which exist
+    in real news. `query` is a manual override for free-text follow-ups."""
     s = get_store()
     if not s.client(cid):
         raise HTTPException(404, "client not found")
-    result = get_market_context(req.query)
+
+    query = req.query
+    if req.insight_id:
+        match = next((i for i in build_client_insights(s, cid, narrate_llm=False)
+                      if i.id == req.insight_id), None)
+        if match:
+            query = build_query(s, cid, match)
+    if not query:
+        raise HTTPException(400, "query or insight_id is required")
+
+    result = get_market_context(query)
     if result is None:
         return {"available": False, "summary": None, "sources": [],
                 "message": "External market context is unavailable right now "

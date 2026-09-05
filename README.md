@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # JB Wealth Intelligence — RM Workbench (starter)
 
 An **intelligence layer between portfolio data and the Relationship Manager**. It
@@ -92,3 +93,7 @@ keep the LLM downstream of both.
 Synthetic data, calibrated to real 2026 market history. For anything that
 happened in 2026, `event_log.csv` is authoritative — the grounding layer only
 ever cites it, never the model's own memory.
+=======
+# janus
+Singhacks hackathon
+>>>>>>> a6965fc7152606a32d796e4e5908b4e6b1ea9e26

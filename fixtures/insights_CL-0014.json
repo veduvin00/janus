@@ -1,0 +1,369 @@
+[
+  {
+    "client_id": "CL-0014",
+    "type": "attribution",
+    "severity": "high",
+    "headline": "Portfolio moved -1,692,845 USD \u2014 driven by Golden Harbour Properties 5.25% Perpetual",
+    "contributions": [
+      {
+        "label": "Trading effect (YTD)",
+        "value": 1866197,
+        "unit": "USD",
+        "detail": "Value change from quantity changes 2025-12-31\u21922026-08-26 \u2014 should be ~0 with no trades"
+      },
+      {
+        "label": "Price effect (YTD)",
+        "value": -3525879,
+        "unit": "USD",
+        "detail": "Market price moves on closing quantities 2025-12-31\u21922026-08-26"
+      },
+      {
+        "label": "FX effect (YTD)",
+        "value": -33162,
+        "unit": "USD",
+        "detail": "Currency moves on closing quantities 2025-12-31\u21922026-08-26"
+      },
+      {
+        "label": "Golden Harbour Properties 5.25% Perpetual",
+        "value": -1536000,
+        "unit": "USD",
+        "detail": "price effect on this holding"
+      },
+      {
+        "label": "Golden Harbour Properties Ltd",
+        "value": -808729,
+        "unit": "USD",
+        "detail": "price effect on this holding"
+      },
+      {
+        "label": "Pacific Rim Bank 4.75% Perpetual",
+        "value": -671000,
+        "unit": "USD",
+        "detail": "price effect on this holding"
+      }
+    ],
+    "evidence": {
+      "event_refs": [],
+      "holding_refs": [
+        "SYN-FI-0207",
+        "SYN-ST-0106",
+        "SYN-FI-0206"
+      ],
+      "rule_refs": [],
+      "snapshot_pair": [
+        "2025-12-31",
+        "2026-08-26"
+      ],
+      "rm_note": "Redevelopment project needs an HKD 60m equity contribution by mid-2027. Client expects to fund it partly from the portfolio. Reviewed what is actually sellable. He was surprised how little of it is liquid."
+    },
+    "confidence": "high",
+    "caveats": [
+      "UNEXPLAINED: Direct Property - Mid-Levels Apartment moved -192,555 USD on price with no matching event in the log",
+      "UNEXPLAINED: Greater China Equity Fund moved 15,404 USD on price with no matching event in the log",
+      "UNEXPLAINED: Asia High Yield Bond Fund moved -333,000 USD on price with no matching event in the log",
+      "UNEXPLAINED: Pacific Rim Bank 4.75% Perpetual moved -671,000 USD on price with no matching event in the log",
+      "UNEXPLAINED: Golden Harbour Properties 5.25% Perpetual moved -1,536,000 USD on price with no matching event in the log",
+      "UNEXPLAINED: Golden Harbour Properties Ltd moved -808,729 USD on price with no matching event in the log"
+    ],
+    "suggested_action": "Open the meeting on which cashflows fund the next few years without forced sales, not on realising losses.",
+    "narrative": "Portfolio moved -1,692,845 USD \u2014 driven by Golden Harbour Properties 5.25% Perpetual. Trading effect (YTD): 1,866,197 USD. Suggested next step: Open the meeting on which cashflows fund the next few years without forced sales, not on realising losses.",
+    "id": "INS-95c78d63",
+    "explained_pct": 0.0,
+    "severity_rank": 3
+  },
+  {
+    "client_id": "CL-0014",
+    "type": "mandate",
+    "severity": "high",
+    "headline": "PF-0016 Equity is 23.4% \u2014 below its 30% mandate limit",
+    "contributions": [
+      {
+        "label": "Equity weight",
+        "value": 23.4,
+        "unit": "%",
+        "detail": "Mandate band breached (below)"
+      }
+    ],
+    "evidence": {
+      "event_refs": [],
+      "holding_refs": [],
+      "rule_refs": [
+        "BAL:Equity:[30,55]"
+      ],
+      "snapshot_pair": [],
+      "rm_note": null
+    },
+    "confidence": "high",
+    "caveats": [],
+    "suggested_action": "Flag for rebalancing back inside the agreed band.",
+    "narrative": "PF-0016 Equity is 23.4% \u2014 below its 30% mandate limit. Equity weight: 23.4 %. Suggested next step: Flag for rebalancing back inside the agreed band.",
+    "id": "INS-553460ac",
+    "explained_pct": null,
+    "severity_rank": 3
+  },
+  {
+    "client_id": "CL-0014",
+    "type": "mandate",
+    "severity": "high",
+    "headline": "Golden Harbour Properties 5.25% Perpetual is 12.9% of PF-0016 \u2014 over the 12.0% single-position limit",
+    "contributions": [
+      {
+        "label": "Golden Harbour Properties 5.25% Perpetual",
+        "value": 12.9,
+        "unit": "%",
+        "detail": "Single-position limit 12.0%"
+      }
+    ],
+    "evidence": {
+      "event_refs": [],
+      "holding_refs": [],
+      "rule_refs": [
+        "BAL:max_single_position=12.0%"
+      ],
+      "snapshot_pair": [],
+      "rm_note": null
+    },
+    "confidence": "high",
+    "caveats": [],
+    "suggested_action": "Flag for rebalancing back inside the agreed band.",
+    "narrative": "Golden Harbour Properties 5.25% Perpetual is 12.9% of PF-0016 \u2014 over the 12.0% single-position limit. Golden Harbour Properties 5.25% Perpetual: 12.9 %. Suggested next step: Flag for rebalancing back inside the agreed band.",
+    "id": "INS-e11dc297",
+    "explained_pct": null,
+    "severity_rank": 3
+  },
+  {
+    "client_id": "CL-0014",
+    "type": "mandate",
+    "severity": "high",
+    "headline": "Pacific Rim Bank 4.75% Perpetual is 17.6% of PF-0016 \u2014 over the 12.0% single-position limit",
+    "contributions": [
+      {
+        "label": "Pacific Rim Bank 4.75% Perpetual",
+        "value": 17.6,
+        "unit": "%",
+        "detail": "Single-position limit 12.0%"
+      }
+    ],
+    "evidence": {
+      "event_refs": [],
+      "holding_refs": [],
+      "rule_refs": [
+        "BAL:max_single_position=12.0%"
+      ],
+      "snapshot_pair": [],
+      "rm_note": null
+    },
+    "confidence": "high",
+    "caveats": [],
+    "suggested_action": "Flag for rebalancing back inside the agreed band.",
+    "narrative": "Pacific Rim Bank 4.75% Perpetual is 17.6% of PF-0016 \u2014 over the 12.0% single-position limit. Pacific Rim Bank 4.75% Perpetual: 17.6 %. Suggested next step: Flag for rebalancing back inside the agreed band.",
+    "id": "INS-d32dbbc0",
+    "explained_pct": null,
+    "severity_rank": 3
+  },
+  {
+    "client_id": "CL-0014",
+    "type": "mandate",
+    "severity": "high",
+    "headline": "Greater China Equity Fund is 13.8% of PF-0016 \u2014 over the 12.0% single-position limit",
+    "contributions": [
+      {
+        "label": "Greater China Equity Fund",
+        "value": 13.8,
+        "unit": "%",
+        "detail": "Single-position limit 12.0%"
+      }
+    ],
+    "evidence": {
+      "event_refs": [],
+      "holding_refs": [],
+      "rule_refs": [
+        "BAL:max_single_position=12.0%"
+      ],
+      "snapshot_pair": [],
+      "rm_note": null
+    },
+    "confidence": "high",
+    "caveats": [],
+    "suggested_action": "Flag for rebalancing back inside the agreed band.",
+    "narrative": "Greater China Equity Fund is 13.8% of PF-0016 \u2014 over the 12.0% single-position limit. Greater China Equity Fund: 13.8 %. Suggested next step: Flag for rebalancing back inside the agreed band.",
+    "id": "INS-bf3b6a06",
+    "explained_pct": null,
+    "severity_rank": 3
+  },
+  {
+    "client_id": "CL-0014",
+    "type": "mandate",
+    "severity": "high",
+    "headline": "Asia High Yield Bond Fund is 13.8% of PF-0016 \u2014 over the 12.0% single-position limit",
+    "contributions": [
+      {
+        "label": "Asia High Yield Bond Fund",
+        "value": 13.8,
+        "unit": "%",
+        "detail": "Single-position limit 12.0%"
+      }
+    ],
+    "evidence": {
+      "event_refs": [],
+      "holding_refs": [],
+      "rule_refs": [
+        "BAL:max_single_position=12.0%"
+      ],
+      "snapshot_pair": [],
+      "rm_note": null
+    },
+    "confidence": "high",
+    "caveats": [],
+    "suggested_action": "Flag for rebalancing back inside the agreed band.",
+    "narrative": "Asia High Yield Bond Fund is 13.8% of PF-0016 \u2014 over the 12.0% single-position limit. Asia High Yield Bond Fund: 13.8 %. Suggested next step: Flag for rebalancing back inside the agreed band.",
+    "id": "INS-c45c3e06",
+    "explained_pct": null,
+    "severity_rank": 3
+  },
+  {
+    "client_id": "CL-0014",
+    "type": "mandate",
+    "severity": "high",
+    "headline": "Direct Property - Mid-Levels Apartment is 19.6% of PF-0016 \u2014 over the 12.0% single-position limit",
+    "contributions": [
+      {
+        "label": "Direct Property - Mid-Levels Apartment",
+        "value": 19.6,
+        "unit": "%",
+        "detail": "Single-position limit 12.0%"
+      }
+    ],
+    "evidence": {
+      "event_refs": [],
+      "holding_refs": [],
+      "rule_refs": [
+        "BAL:max_single_position=12.0%"
+      ],
+      "snapshot_pair": [],
+      "rm_note": null
+    },
+    "confidence": "high",
+    "caveats": [],
+    "suggested_action": "Flag for rebalancing back inside the agreed band.",
+    "narrative": "Direct Property - Mid-Levels Apartment is 19.6% of PF-0016 \u2014 over the 12.0% single-position limit. Direct Property - Mid-Levels Apartment: 19.6 %. Suggested next step: Flag for rebalancing back inside the agreed band.",
+    "id": "INS-180274d6",
+    "explained_pct": null,
+    "severity_rank": 3
+  },
+  {
+    "client_id": "CL-0014",
+    "type": "collateral",
+    "severity": "high",
+    "headline": "CF-0002 LTV is 69.41% vs a 70.0% margin-call trigger (0.6 pts of headroom)",
+    "contributions": [
+      {
+        "label": "Current LTV",
+        "value": 69.41,
+        "unit": "%",
+        "detail": "Margin call at 70.0%"
+      },
+      {
+        "label": "Headroom to trigger",
+        "value": 0.6,
+        "unit": "pts",
+        "detail": "Distance before a margin call"
+      },
+      {
+        "label": "LTV 2025-12-31",
+        "value": 53.93,
+        "unit": "%",
+        "detail": "drawn 52,000,000"
+      },
+      {
+        "label": "LTV 2026-02-27",
+        "value": 53.53,
+        "unit": "%",
+        "detail": "drawn 52,000,000"
+      },
+      {
+        "label": "LTV 2026-03-31",
+        "value": 65.62,
+        "unit": "%",
+        "detail": "drawn 58,000,000"
+      },
+      {
+        "label": "LTV 2026-06-30",
+        "value": 67.96,
+        "unit": "%",
+        "detail": "drawn 58,000,000"
+      },
+      {
+        "label": "LTV 2026-08-26",
+        "value": 69.41,
+        "unit": "%",
+        "detail": "drawn 58,000,000"
+      }
+    ],
+    "evidence": {
+      "event_refs": [],
+      "holding_refs": [],
+      "rule_refs": [],
+      "snapshot_pair": [
+        "2025-12-31",
+        "2026-08-26"
+      ],
+      "rm_note": "Accumulator settlements are running against the client. Drew a further HKD 4m on the facility to meet obligations. Client remains convinced the Hong Kong property market turns this year. I pointed out that the perpetual, the shares, the accumulator and his own development business are all the same bet. He said that is why he is confident."
+    },
+    "confidence": "high",
+    "caveats": [],
+    "suggested_action": "Walk the LTV trajectory with the client; agree a plan before collateral volatility forces the bank's hand.",
+    "narrative": "CF-0002 LTV is 69.41% vs a 70.0% margin-call trigger (0.6 pts of headroom). Current LTV: 69.41 %. Suggested next step: Walk the LTV trajectory with the client; agree a plan before collateral volatility forces the bank's hand.",
+    "id": "INS-9dea2961",
+    "explained_pct": null,
+    "severity_rank": 3
+  },
+  {
+    "client_id": "CL-0014",
+    "type": "liquidity",
+    "severity": "high",
+    "headline": "Near-term demands of 60,000,000 USD against 19,437,114 USD of readily sellable assets",
+    "contributions": [
+      {
+        "label": "Ready liquidity (Daily/Weekly)",
+        "value": 19437114,
+        "unit": "USD",
+        "detail": ""
+      },
+      {
+        "label": "Uncalled commitments",
+        "value": 0,
+        "unit": "USD",
+        "detail": ""
+      },
+      {
+        "label": "Planned cash needs",
+        "value": 60000000,
+        "unit": "USD",
+        "detail": ""
+      },
+      {
+        "label": "Liquidity gap",
+        "value": -40562886,
+        "unit": "USD",
+        "detail": "Ready liquidity minus total demand"
+      }
+    ],
+    "evidence": {
+      "event_refs": [],
+      "holding_refs": [],
+      "rule_refs": [],
+      "snapshot_pair": [],
+      "rm_note": null
+    },
+    "confidence": "high",
+    "caveats": [
+      "Some assets are gated/illiquid and cannot be relied on: Accumulator ref. Golden Harbour Properties Ltd, 12M, Direct Property - Mid-Levels Apartment"
+    ],
+    "suggested_action": "Produce a liquidity map: which obligations are matched by sellable assets, and where the timing is tight.",
+    "narrative": "Near-term demands of 60,000,000 USD against 19,437,114 USD of readily sellable assets. Ready liquidity (Daily/Weekly): 19,437,114 USD. Suggested next step: Produce a liquidity map: which obligations are matched by sellable assets, and where the timing is tight.",
+    "id": "INS-6274fe2f",
+    "explained_pct": null,
+    "severity_rank": 3
+  }
+]

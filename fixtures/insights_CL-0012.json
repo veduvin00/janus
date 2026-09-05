@@ -1,0 +1,218 @@
+[
+  {
+    "client_id": "CL-0012",
+    "type": "attribution",
+    "severity": "high",
+    "headline": "Portfolio moved -2,102,157 USD \u2014 driven by US Treasury 2.375% due 2045",
+    "contributions": [
+      {
+        "label": "Trading effect (YTD)",
+        "value": 0,
+        "unit": "USD",
+        "detail": "Value change from quantity changes 2025-12-31\u21922026-08-26 \u2014 should be ~0 with no trades"
+      },
+      {
+        "label": "Price effect (YTD)",
+        "value": -2036242,
+        "unit": "USD",
+        "detail": "Market price moves on closing quantities 2025-12-31\u21922026-08-26"
+      },
+      {
+        "label": "FX effect (YTD)",
+        "value": -65915,
+        "unit": "USD",
+        "detail": "Currency moves on closing quantities 2025-12-31\u21922026-08-26"
+      },
+      {
+        "label": "US Treasury 2.375% due 2045",
+        "value": -1020000,
+        "unit": "USD",
+        "detail": "price effect on this holding"
+      },
+      {
+        "label": "Golden Harbour Properties 5.25% Perpetual",
+        "value": -640000,
+        "unit": "USD",
+        "detail": "price effect on this holding"
+      },
+      {
+        "label": "Pacific Rim Bank 4.75% Perpetual",
+        "value": -366000,
+        "unit": "USD",
+        "detail": "price effect on this holding"
+      }
+    ],
+    "evidence": {
+      "event_refs": [
+        "2026-06-17: Federal Reserve holds the target range at 3.50-3.75% at the first meet",
+        "2026-06-19: US 10-year Treasury yield rises to about 4.46%, near its highest level",
+        "2026-07-29: Federal Reserve holds again at 3.50-3.75% with three dissents. US 10-y"
+      ],
+      "holding_refs": [
+        "SYN-FI-0201",
+        "SYN-FI-0207",
+        "SYN-FI-0206"
+      ],
+      "rule_refs": [],
+      "snapshot_pair": [
+        "2025-12-31",
+        "2026-08-26"
+      ],
+      "rm_note": "Client increased his quarterly drawdown to cover medical costs. He asked why his income portfolio has lost money in a year when he was told bonds were the safe part. Explained duration. He said he does not want to sell anything at a loss and would rather wait for the bonds to come back. Note that he is 71 and the longest bond does not mature until 2045."
+    },
+    "confidence": "high",
+    "caveats": [
+      "UNEXPLAINED: Global Infrastructure Debt Fund moved -48,000 USD on price with no matching event in the log",
+      "UNEXPLAINED: Global Developed Equity Index Fund moved 137,200 USD on price with no matching event in the log",
+      "UNEXPLAINED: Global Listed Infrastructure Fund moved 88,800 USD on price with no matching event in the log",
+      "UNEXPLAINED: Singapore REIT Income Fund moved -96,512 USD on price with no matching event in the log",
+      "UNEXPLAINED: Pacific Rim Bank 4.75% Perpetual moved -366,000 USD on price with no matching event in the log",
+      "UNEXPLAINED: Golden Harbour Properties 5.25% Perpetual moved -640,000 USD on price with no matching event in the log"
+    ],
+    "suggested_action": "Open the meeting on which cashflows fund the next few years without forced sales, not on realising losses.",
+    "narrative": "Portfolio moved -2,102,157 USD \u2014 driven by US Treasury 2.375% due 2045. Trading effect (YTD): 0 USD. Grounded in: 2026-06-17: Federal Reserve holds the target range at 3.50-3.75% at the first meet; 2026-06-19: US 10-year Treasury yield rises to about 4.46%, near its highest level. Suggested next step: Open the meeting on which cashflows fund the next few years without forced sales, not on realising losses.",
+    "id": "INS-77ba174c",
+    "explained_pct": 57.2,
+    "severity_rank": 3
+  },
+  {
+    "client_id": "CL-0012",
+    "type": "mandate",
+    "severity": "high",
+    "headline": "US Treasury 2.375% due 2045 is 20.8% of PF-0014 \u2014 over the 10.0% single-position limit",
+    "contributions": [
+      {
+        "label": "US Treasury 2.375% due 2045",
+        "value": 20.8,
+        "unit": "%",
+        "detail": "Single-position limit 10.0%"
+      }
+    ],
+    "evidence": {
+      "event_refs": [],
+      "holding_refs": [],
+      "rule_refs": [
+        "INC:max_single_position=10.0%"
+      ],
+      "snapshot_pair": [],
+      "rm_note": null
+    },
+    "confidence": "high",
+    "caveats": [],
+    "suggested_action": "Flag for rebalancing back inside the agreed band.",
+    "narrative": "US Treasury 2.375% due 2045 is 20.8% of PF-0014 \u2014 over the 10.0% single-position limit. US Treasury 2.375% due 2045: 20.8 %. Suggested next step: Flag for rebalancing back inside the agreed band.",
+    "id": "INS-9e3e5ac0",
+    "explained_pct": null,
+    "severity_rank": 3
+  },
+  {
+    "client_id": "CL-0012",
+    "type": "mandate",
+    "severity": "high",
+    "headline": "Global Investment Grade Corporate Bond Fund is 16.7% of PF-0014 \u2014 over the 10.0% single-position limit",
+    "contributions": [
+      {
+        "label": "Global Investment Grade Corporate Bond Fund",
+        "value": 16.7,
+        "unit": "%",
+        "detail": "Single-position limit 10.0%"
+      }
+    ],
+    "evidence": {
+      "event_refs": [],
+      "holding_refs": [],
+      "rule_refs": [
+        "INC:max_single_position=10.0%"
+      ],
+      "snapshot_pair": [],
+      "rm_note": null
+    },
+    "confidence": "high",
+    "caveats": [],
+    "suggested_action": "Flag for rebalancing back inside the agreed band.",
+    "narrative": "Global Investment Grade Corporate Bond Fund is 16.7% of PF-0014 \u2014 over the 10.0% single-position limit. Global Investment Grade Corporate Bond Fund: 16.7 %. Suggested next step: Flag for rebalancing back inside the agreed band.",
+    "id": "INS-d733a27d",
+    "explained_pct": null,
+    "severity_rank": 3
+  },
+  {
+    "client_id": "CL-0012",
+    "type": "mandate",
+    "severity": "high",
+    "headline": "Asia Investment Grade Credit Fund is 15.1% of PF-0014 \u2014 over the 10.0% single-position limit",
+    "contributions": [
+      {
+        "label": "Asia Investment Grade Credit Fund",
+        "value": 15.1,
+        "unit": "%",
+        "detail": "Single-position limit 10.0%"
+      }
+    ],
+    "evidence": {
+      "event_refs": [],
+      "holding_refs": [],
+      "rule_refs": [
+        "INC:max_single_position=10.0%"
+      ],
+      "snapshot_pair": [],
+      "rm_note": null
+    },
+    "confidence": "high",
+    "caveats": [],
+    "suggested_action": "Flag for rebalancing back inside the agreed band.",
+    "narrative": "Asia Investment Grade Credit Fund is 15.1% of PF-0014 \u2014 over the 10.0% single-position limit. Asia Investment Grade Credit Fund: 15.1 %. Suggested next step: Flag for rebalancing back inside the agreed band.",
+    "id": "INS-6e38c979",
+    "explained_pct": null,
+    "severity_rank": 3
+  },
+  {
+    "client_id": "CL-0012",
+    "type": "concentration",
+    "severity": "high",
+    "headline": "52.5% of the book is exposed to 'duration'",
+    "contributions": [
+      {
+        "label": "'duration' exposure",
+        "value": 52.5,
+        "unit": "%",
+        "detail": "14,715,900 USD of 28,028,705 USD book"
+      },
+      {
+        "label": "US Treasury 2.375% due 2045",
+        "value": 5820000,
+        "unit": "USD",
+        "detail": "in PF-0014"
+      },
+      {
+        "label": "Global Investment Grade Corporate Bond Fund",
+        "value": 4670400,
+        "unit": "USD",
+        "detail": "in PF-0014"
+      },
+      {
+        "label": "Asia Investment Grade Credit Fund",
+        "value": 4225500,
+        "unit": "USD",
+        "detail": "in PF-0014"
+      }
+    ],
+    "evidence": {
+      "event_refs": [],
+      "holding_refs": [
+        "SYN-FI-0201",
+        "SYN-FI-0203",
+        "SYN-FI-0204"
+      ],
+      "rule_refs": [],
+      "snapshot_pair": [],
+      "rm_note": null
+    },
+    "confidence": "high",
+    "caveats": [],
+    "suggested_action": "Show the aggregated exposure; test whether it still matches the client's stated intent for this money.",
+    "narrative": "52.5% of the book is exposed to 'duration'. 'duration' exposure: 52.5 %. Suggested next step: Show the aggregated exposure; test whether it still matches the client's stated intent for this money.",
+    "id": "INS-360c2668",
+    "explained_pct": null,
+    "severity_rank": 3
+  }
+]

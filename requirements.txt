@@ -1,5 +1,8 @@
 pandas>=2.0
 fastapi>=0.110
 uvicorn[standard]>=0.27
-anthropic>=0.40   # optional — only needed for LLM narration (--llm). Fallback works without it.
+openai>=1.50      # optional — only needed for LLM narration (--llm), Ask Why chat,
+                  # and market-context web search. Fallback works without it.
+python-dotenv>=1.0  # loads OPENAI_API_KEY etc. from .env automatically
+truststore>=0.8      # corporate-proxy SSL support for the OpenAI client
 pytest>=8.0

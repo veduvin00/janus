@@ -1,0 +1,414 @@
+[
+  {
+    "client_id": "CL-0002",
+    "type": "mandate",
+    "severity": "high",
+    "headline": "PF-0004 Cash and Equivalents is 0.0% \u2014 below its 1% mandate limit",
+    "contributions": [
+      {
+        "label": "Cash and Equivalents weight",
+        "value": 0.0,
+        "unit": "%",
+        "detail": "Mandate band breached (below)"
+      }
+    ],
+    "evidence": {
+      "event_refs": [],
+      "holding_refs": [],
+      "rule_refs": [
+        "GROW:Cash and Equivalents:[1,12]"
+      ],
+      "snapshot_pair": [],
+      "rm_note": null
+    },
+    "confidence": "high",
+    "caveats": [],
+    "suggested_action": "Flag for rebalancing back inside the agreed band.",
+    "narrative": "PF-0004 Cash and Equivalents is 0.0% \u2014 below its 1% mandate limit. Cash and Equivalents weight: 0.0 %. Suggested next step: Flag for rebalancing back inside the agreed band.",
+    "id": "INS-3dbda477",
+    "explained_pct": null,
+    "severity_rank": 3
+  },
+  {
+    "client_id": "CL-0002",
+    "type": "mandate",
+    "severity": "high",
+    "headline": "PF-0004 Fixed Income is 0.0% \u2014 below its 5% mandate limit",
+    "contributions": [
+      {
+        "label": "Fixed Income weight",
+        "value": 0.0,
+        "unit": "%",
+        "detail": "Mandate band breached (below)"
+      }
+    ],
+    "evidence": {
+      "event_refs": [],
+      "holding_refs": [],
+      "rule_refs": [
+        "GROW:Fixed Income:[5,25]"
+      ],
+      "snapshot_pair": [],
+      "rm_note": null
+    },
+    "confidence": "high",
+    "caveats": [],
+    "suggested_action": "Flag for rebalancing back inside the agreed band.",
+    "narrative": "PF-0004 Fixed Income is 0.0% \u2014 below its 5% mandate limit. Fixed Income weight: 0.0 %. Suggested next step: Flag for rebalancing back inside the agreed band.",
+    "id": "INS-2cb92b0a",
+    "explained_pct": null,
+    "severity_rank": 3
+  },
+  {
+    "client_id": "CL-0002",
+    "type": "mandate",
+    "severity": "high",
+    "headline": "PF-0004 Equity is 0.0% \u2014 below its 50% mandate limit",
+    "contributions": [
+      {
+        "label": "Equity weight",
+        "value": 0.0,
+        "unit": "%",
+        "detail": "Mandate band breached (below)"
+      }
+    ],
+    "evidence": {
+      "event_refs": [],
+      "holding_refs": [],
+      "rule_refs": [
+        "GROW:Equity:[50,78]"
+      ],
+      "snapshot_pair": [],
+      "rm_note": null
+    },
+    "confidence": "high",
+    "caveats": [],
+    "suggested_action": "Flag for rebalancing back inside the agreed band.",
+    "narrative": "PF-0004 Equity is 0.0% \u2014 below its 50% mandate limit. Equity weight: 0.0 %. Suggested next step: Flag for rebalancing back inside the agreed band.",
+    "id": "INS-555b6ed7",
+    "explained_pct": null,
+    "severity_rank": 3
+  },
+  {
+    "client_id": "CL-0002",
+    "type": "mandate",
+    "severity": "high",
+    "headline": "PF-0004 Alternatives is 100.0% \u2014 above its 30% mandate limit",
+    "contributions": [
+      {
+        "label": "Alternatives weight",
+        "value": 100.0,
+        "unit": "%",
+        "detail": "Mandate band breached (above)"
+      }
+    ],
+    "evidence": {
+      "event_refs": [],
+      "holding_refs": [],
+      "rule_refs": [
+        "GROW:Alternatives:[0,30]"
+      ],
+      "snapshot_pair": [],
+      "rm_note": null
+    },
+    "confidence": "high",
+    "caveats": [],
+    "suggested_action": "Flag for rebalancing back inside the agreed band.",
+    "narrative": "PF-0004 Alternatives is 100.0% \u2014 above its 30% mandate limit. Alternatives weight: 100.0 %. Suggested next step: Flag for rebalancing back inside the agreed band.",
+    "id": "INS-e3b77cad",
+    "explained_pct": null,
+    "severity_rank": 3
+  },
+  {
+    "client_id": "CL-0002",
+    "type": "concentration",
+    "severity": "high",
+    "headline": "88.6% of the book is exposed to 'technology' across 2 portfolios",
+    "contributions": [
+      {
+        "label": "'technology' exposure",
+        "value": 88.6,
+        "unit": "%",
+        "detail": "41,357,000 USD of 46,699,200 USD book"
+      },
+      {
+        "label": "Unlisted Holding - Aranya Technologies Pte Ltd",
+        "value": 31920000,
+        "unit": "USD",
+        "detail": "in PF-0004"
+      },
+      {
+        "label": "US Technology Leaders Fund",
+        "value": 3552600,
+        "unit": "USD",
+        "detail": "in PF-0003"
+      },
+      {
+        "label": "Meridian Semiconductor Corp",
+        "value": 2242800,
+        "unit": "USD",
+        "detail": "in PF-0003"
+      },
+      {
+        "label": "Helios Cloud Systems Inc",
+        "value": 2069600,
+        "unit": "USD",
+        "detail": "in PF-0003"
+      }
+    ],
+    "evidence": {
+      "event_refs": [],
+      "holding_refs": [
+        "SYN-AL-0308",
+        "SYN-EQ-0003",
+        "SYN-ST-0102",
+        "SYN-ST-0103",
+        "SYN-SP-0502"
+      ],
+      "rule_refs": [],
+      "snapshot_pair": [],
+      "rm_note": null
+    },
+    "confidence": "medium",
+    "caveats": [
+      "Includes look-through on structured products to their underlying theme \u2014 verify the reference basket"
+    ],
+    "suggested_action": "Show the aggregated exposure; test whether it still matches the client's stated intent for this money.",
+    "narrative": "88.6% of the book is exposed to 'technology' across 2 portfolios. 'technology' exposure: 88.6 %. Caveat: Includes look-through on structured products to their underlying theme \u2014 verify the reference basket Suggested next step: Show the aggregated exposure; test whether it still matches the client's stated intent for this money.",
+    "id": "INS-d4aaf18a",
+    "explained_pct": null,
+    "severity_rank": 3
+  },
+  {
+    "client_id": "CL-0002",
+    "type": "collateral",
+    "severity": "high",
+    "headline": "CF-0001 LTV is 73.71% vs a 75.0% margin-call trigger (1.3 pts of headroom)",
+    "contributions": [
+      {
+        "label": "Current LTV",
+        "value": 73.71,
+        "unit": "%",
+        "detail": "Margin call at 75.0%"
+      },
+      {
+        "label": "Headroom to trigger",
+        "value": 1.3,
+        "unit": "pts",
+        "detail": "Distance before a margin call"
+      },
+      {
+        "label": "LTV 2025-12-31",
+        "value": 63.32,
+        "unit": "%",
+        "detail": "drawn 4,800,000"
+      },
+      {
+        "label": "LTV 2026-02-27",
+        "value": 59.72,
+        "unit": "%",
+        "detail": "drawn 4,800,000"
+      },
+      {
+        "label": "LTV 2026-03-31",
+        "value": 61.68,
+        "unit": "%",
+        "detail": "drawn 4,800,000"
+      },
+      {
+        "label": "LTV 2026-06-30",
+        "value": 75.64,
+        "unit": "%",
+        "detail": "drawn 6,500,000"
+      },
+      {
+        "label": "LTV 2026-08-26",
+        "value": 73.71,
+        "unit": "%",
+        "detail": "drawn 6,500,000"
+      }
+    ],
+    "evidence": {
+      "event_refs": [],
+      "holding_refs": [],
+      "rule_refs": [],
+      "snapshot_pair": [
+        "2025-12-31",
+        "2026-08-26"
+      ],
+      "rm_note": "Difficult call. Client was agitated about the drop in his technology holdings last week and the effect on his collateral value. Drew a further USD 1.7m to fund a pre-IPO secondary. I flagged that this increases his utilisation at exactly the moment his collateral is most volatile. He acknowledged the point but proceeded. Needs monitoring."
+    },
+    "confidence": "high",
+    "caveats": [],
+    "suggested_action": "Walk the LTV trajectory with the client; agree a plan before collateral volatility forces the bank's hand.",
+    "narrative": "CF-0001 LTV is 73.71% vs a 75.0% margin-call trigger (1.3 pts of headroom). Current LTV: 73.71 %. Suggested next step: Walk the LTV trajectory with the client; agree a plan before collateral volatility forces the bank's hand.",
+    "id": "INS-e2e853b7",
+    "explained_pct": null,
+    "severity_rank": 3
+  },
+  {
+    "client_id": "CL-0002",
+    "type": "mandate",
+    "severity": "medium",
+    "headline": "US Technology Leaders Fund is 24.0% of PF-0003 \u2014 over the 15.0% single-position limit",
+    "contributions": [
+      {
+        "label": "US Technology Leaders Fund",
+        "value": 24.0,
+        "unit": "%",
+        "detail": "Single-position limit 15.0%"
+      }
+    ],
+    "evidence": {
+      "event_refs": [],
+      "holding_refs": [],
+      "rule_refs": [
+        "GROW:max_single_position=15.0%"
+      ],
+      "snapshot_pair": [],
+      "rm_note": null
+    },
+    "confidence": "high",
+    "caveats": [
+      "Client-directed breach (waiver on file) \u2014 governance, not drift"
+    ],
+    "suggested_action": "Confirm the waiver still reflects the client's intent.",
+    "narrative": "US Technology Leaders Fund is 24.0% of PF-0003 \u2014 over the 15.0% single-position limit. US Technology Leaders Fund: 24.0 %. Suggested next step: Confirm the waiver still reflects the client's intent.",
+    "id": "INS-37cffbf5",
+    "explained_pct": null,
+    "severity_rank": 2
+  },
+  {
+    "client_id": "CL-0002",
+    "type": "mandate",
+    "severity": "medium",
+    "headline": "Meridian Semiconductor Corp is 15.2% of PF-0003 \u2014 over the 15.0% single-position limit",
+    "contributions": [
+      {
+        "label": "Meridian Semiconductor Corp",
+        "value": 15.2,
+        "unit": "%",
+        "detail": "Single-position limit 15.0%"
+      }
+    ],
+    "evidence": {
+      "event_refs": [],
+      "holding_refs": [],
+      "rule_refs": [
+        "GROW:max_single_position=15.0%"
+      ],
+      "snapshot_pair": [],
+      "rm_note": null
+    },
+    "confidence": "high",
+    "caveats": [
+      "Client-directed breach (waiver on file) \u2014 governance, not drift"
+    ],
+    "suggested_action": "Confirm the waiver still reflects the client's intent.",
+    "narrative": "Meridian Semiconductor Corp is 15.2% of PF-0003 \u2014 over the 15.0% single-position limit. Meridian Semiconductor Corp: 15.2 %. Suggested next step: Confirm the waiver still reflects the client's intent.",
+    "id": "INS-371ecdac",
+    "explained_pct": null,
+    "severity_rank": 2
+  },
+  {
+    "client_id": "CL-0002",
+    "type": "mandate",
+    "severity": "medium",
+    "headline": "Unlisted Holding - Aranya Technologies Pte Ltd is 100.0% of PF-0004 \u2014 over the 15.0% single-position limit",
+    "contributions": [
+      {
+        "label": "Unlisted Holding - Aranya Technologies Pte Ltd",
+        "value": 100.0,
+        "unit": "%",
+        "detail": "Single-position limit 15.0%"
+      }
+    ],
+    "evidence": {
+      "event_refs": [],
+      "holding_refs": [],
+      "rule_refs": [
+        "GROW:max_single_position=15.0%"
+      ],
+      "snapshot_pair": [],
+      "rm_note": null
+    },
+    "confidence": "high",
+    "caveats": [
+      "Client-directed breach (waiver on file) \u2014 governance, not drift"
+    ],
+    "suggested_action": "Confirm the waiver still reflects the client's intent.",
+    "narrative": "Unlisted Holding - Aranya Technologies Pte Ltd is 100.0% of PF-0004 \u2014 over the 15.0% single-position limit. Unlisted Holding - Aranya Technologies Pte Ltd: 100.0 %. Suggested next step: Confirm the waiver still reflects the client's intent.",
+    "id": "INS-13d25e63",
+    "explained_pct": null,
+    "severity_rank": 2
+  },
+  {
+    "client_id": "CL-0002",
+    "type": "attribution",
+    "severity": "low",
+    "headline": "Portfolio moved 2,902,700 USD \u2014 driven by USD Call Deposit",
+    "contributions": [
+      {
+        "label": "Trading effect (YTD)",
+        "value": 1572000,
+        "unit": "USD",
+        "detail": "Value change from quantity changes 2025-12-31\u21922026-08-26 \u2014 should be ~0 with no trades"
+      },
+      {
+        "label": "Price effect (YTD)",
+        "value": 1330700,
+        "unit": "USD",
+        "detail": "Market price moves on closing quantities 2025-12-31\u21922026-08-26"
+      },
+      {
+        "label": "FX effect (YTD)",
+        "value": 0,
+        "unit": "USD",
+        "detail": "Currency moves on closing quantities 2025-12-31\u21922026-08-26"
+      },
+      {
+        "label": "USD Call Deposit",
+        "value": 0,
+        "unit": "USD",
+        "detail": "price effect on this holding"
+      },
+      {
+        "label": "Equity Linked Note ref. Helios Cloud Systems, 11.00% p.a., 6M",
+        "value": 0,
+        "unit": "USD",
+        "detail": "price effect on this holding"
+      },
+      {
+        "label": "Unlisted Holding - Aranya Technologies Pte Ltd",
+        "value": 0,
+        "unit": "USD",
+        "detail": "price effect on this holding"
+      }
+    ],
+    "evidence": {
+      "event_refs": [],
+      "holding_refs": [
+        "SYN-CA-0601",
+        "SYN-SP-0502",
+        "SYN-AL-0308"
+      ],
+      "rule_refs": [],
+      "snapshot_pair": [
+        "2025-12-31",
+        "2026-08-26"
+      ],
+      "rm_note": "Secondary sale process is progressing, bankers indicate Q4 2026 at a valuation meaningfully above the last round. Client wants to avoid selling any listed positions before then because he views the tech complex as the best place to be. Comfortable increasing the Lombard line if needed."
+    },
+    "confidence": "high",
+    "caveats": [
+      "UNEXPLAINED: Global Developed Equity Index Fund moved 117,600 USD on price with no matching event in the log",
+      "UNEXPLAINED: India Equity Fund moved 93,600 USD on price with no matching event in the log",
+      "UNEXPLAINED: Short Duration USD Bond Fund moved 7,200 USD on price with no matching event in the log"
+    ],
+    "suggested_action": "Open the meeting on which cashflows fund the next few years without forced sales, not on realising losses.",
+    "narrative": "Portfolio moved 2,902,700 USD \u2014 driven by USD Call Deposit. Trading effect (YTD): 1,572,000 USD. Suggested next step: Open the meeting on which cashflows fund the next few years without forced sales, not on realising losses.",
+    "id": "INS-c8918288",
+    "explained_pct": 83.6,
+    "severity_rank": 1
+  }
+]

@@ -5,7 +5,7 @@ run.py — one-command smoke test. Proves the engine works end to end, offline.
     python run.py CL-0002        # insights for a specific client
 
 To narrate with a real model instead of the deterministic fallback:
-    export ANTHROPIC_API_KEY=...   then add --llm
+    export OPENAI_API_KEY=...   then add --llm
 """
 import sys
 from src.ingest import get_store

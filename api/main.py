@@ -17,16 +17,19 @@ from __future__ import annotations
 import os
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
 
 from src.ingest import get_store
 from src.build import build_client_insights
 from src.engine.prioritise import build_triage
+from src.engine.narrate.chat import ask_why
+from src.engine.narrate.market_context import get_market_context
 
 app = FastAPI(title="JB Wealth Intelligence — RM Workbench API")
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"],
                    allow_headers=["*"])
 
-USE_LLM = bool(os.environ.get("ANTHROPIC_API_KEY"))
+USE_LLM = bool(os.environ.get("OPENAI_API_KEY"))
 _cache: dict = {}
 
 
@@ -73,7 +76,47 @@ def client_insights(cid: str):
     return _cache[key]
 
 
+class ChatRequest(BaseModel):
+    question: str
+
+
+@app.post("/clients/{cid}/chat")
+def chat(cid: str, req: ChatRequest):
+    s = get_store()
+    if not s.client(cid):
+        raise HTTPException(404, "client not found")
+    answer = ask_why(s, cid, req.question)
+    if answer is None:
+        return {"available": False, "answer": None,
+                "message": "Ask Why is unavailable right now (no OPENAI_API_KEY "
+                           "configured, or the model call failed) — the rest of the "
+                           "workbench is unaffected."}
+    return {"available": True, "answer": answer}
+
+
+class MarketContextRequest(BaseModel):
+    query: str
+
+
+@app.post("/clients/{cid}/market-context")
+def market_context(cid: str, req: MarketContextRequest):
+    """Deliberately NOT grounded in this client's data — see
+    src/engine/narrate/market_context.py. Live web search restricted to
+    reputable financial press, quarantined from the Insight pipeline: never
+    feeds contributions, explained_pct, or suggested_action."""
+    s = get_store()
+    if not s.client(cid):
+        raise HTTPException(404, "client not found")
+    result = get_market_context(req.query)
+    if result is None:
+        return {"available": False, "summary": None, "sources": [],
+                "message": "External market context is unavailable right now "
+                           "(no OPENAI_API_KEY, or the search failed)."}
+    return {"available": True, **result}
+
+
 @app.get("/")
 def root():
     return {"ok": True, "llm_narration": USE_LLM,
-            "endpoints": ["/clients", "/triage", "/clients/{id}", "/clients/{id}/insights"]}
+            "endpoints": ["/clients", "/triage", "/clients/{id}", "/clients/{id}/insights",
+                         "/clients/{id}/chat", "/clients/{id}/market-context"]}

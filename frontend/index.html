@@ -72,6 +72,22 @@
             margin:6px 0 0;line-height:1.5;font-style:italic}
   .empty{color:var(--slate);margin-top:40px}
   .tag{font-size:10px;color:var(--slate)}
+  .btns button.ghost{background:#fff}
+  .askbox,.mktbox{display:none;margin-top:10px;border-radius:8px;padding:10px 12px;font-size:12.5px}
+  .askbox.open,.mktbox.open{display:block}
+  .askbox{background:#f4f6f8;border:1px solid var(--line)}
+  .mktbox{background:#fff8ea;border:1px solid #e8d9ad}
+  .askbox .row,.mktbox .row{display:flex;gap:6px;margin-bottom:8px}
+  .askbox input{flex:1;font-family:var(--sans);font-size:12.5px;padding:6px 9px;
+                border:1px solid var(--line);border-radius:6px}
+  .askbox button,.mktbox .go{font-family:var(--sans);font-size:12px;border:1px solid var(--ink);
+       background:var(--ink);color:#fff;border-radius:6px;padding:6px 12px;cursor:pointer}
+  .askbox .ans{line-height:1.5;white-space:pre-wrap}
+  .mktlabel{font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;
+            color:#8a6d1f;margin-bottom:6px}
+  .mktbox .src{display:block;font-size:11.5px;margin-top:3px}
+  .mktbox .src a{color:var(--accent)}
+  .loading{color:var(--slate);font-style:italic}
 </style>
 </head>
 <body>
@@ -131,8 +147,10 @@ async function loadClient(cid){
 
   if(!insights.length){ html += "<div class='empty'>No flags for this client.</div>"; main.innerHTML = html; return; }
 
+  window.__cid = cid;
+  window.__insights = insights;
   let ci = 0;
-  insights.forEach(ins=>{
+  insights.forEach((ins, idx)=>{
     const chips = ins.contributions.map(c=>chip(c, "c"+(ci++))).join("");
     const events = (ins.evidence.event_refs||[]).map((e,k)=>
       `<span class="chip event" onclick="tog('e${ci}_${k}')">⚑ ${e.split(":")[0]}</span>
@@ -150,10 +168,64 @@ async function loadClient(cid){
       ${caveats}${note}
       <div class="action"><div class="lbl">Suggested action</div>
         <div class="txt">${ins.suggested_action}</div>
-        <div class="btns"><button class="acc">Accept</button><button>Modify</button><button>Reject</button></div>
+        <div class="btns">
+          <button class="acc">Accept</button><button>Modify</button><button>Reject</button>
+          <button class="ghost" onclick="toggleAsk(${idx})">Ask Why</button>
+          <button class="ghost" onclick="toggleMkt(${idx})">📰 Market context</button>
+        </div>
+        <div class="askbox" id="ask${idx}">
+          <div class="row">
+            <input id="askq${idx}" value='Tell me more about: &quot;${ins.headline.replace(/'/g,"&#39;")}&quot;'/>
+            <button onclick="sendAsk(${idx})">Ask</button>
+          </div>
+          <div class="ans" id="askans${idx}"></div>
+        </div>
+        <div class="mktbox" id="mkt${idx}">
+          <div class="mktlabel">⚠ Unverified external source — not used in the numbers above</div>
+          <div id="mktans${idx}"></div>
+        </div>
       </div></div>`;
   });
   main.innerHTML = html;
+}
+
+function toggleAsk(idx){
+  document.getElementById("ask"+idx).classList.toggle("open");
+}
+
+async function sendAsk(idx){
+  const box = document.getElementById("askans"+idx);
+  const q = document.getElementById("askq"+idx).value.trim();
+  if(!q) return;
+  box.innerHTML = `<span class="loading">Asking…</span>`;
+  try{
+    const r = await fetch(`${API}/clients/${window.__cid}/chat`, {
+      method:"POST", headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({question:q}) });
+    const d = await r.json();
+    box.textContent = d.available ? d.answer : (d.message || "Ask Why is unavailable.");
+  }catch(e){ box.textContent = "Ask Why is unavailable (request failed)."; }
+}
+
+async function toggleMkt(idx){
+  const el = document.getElementById("mkt"+idx);
+  const opening = !el.classList.contains("open");
+  el.classList.toggle("open");
+  if(!opening) return;
+  const ans = document.getElementById("mktans"+idx);
+  if(ans.dataset.loaded) return;
+  ans.innerHTML = `<span class="loading">Searching reputable financial press…</span>`;
+  const headline = (window.__insights[idx]||{}).headline || "";
+  try{
+    const r = await fetch(`${API}/clients/${window.__cid}/market-context`, {
+      method:"POST", headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({query: headline}) });
+    const d = await r.json();
+    if(!d.available){ ans.textContent = d.message || "Market context is unavailable."; return; }
+    const srcs = (d.sources||[]).map(s=>`<span class="src">↳ <a href="${s.url}" target="_blank" rel="noopener">${s.title}</a></span>`).join("");
+    ans.innerHTML = `<div>${d.summary}</div>${srcs}`;
+    ans.dataset.loaded = "1";
+  }catch(e){ ans.textContent = "Market context is unavailable (request failed)."; }
 }
 loadTriage();
 </script>

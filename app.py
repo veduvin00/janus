@@ -283,17 +283,17 @@ CUSTOM_CSS = """
     box-shadow: 0 0 0 2px var(--accent-soft);
   }
   .rank-badge {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     width: 20px;
     height: 20px;
-    line-height: 20px;
-    text-align: center;
     border-radius: 50%;
     background: var(--ink);
     color: #ffffff;
     font-size: 11px;
-    margin-right: 6px;
     font-weight: 700;
+    flex-shrink: 0;
   }
   .card-box {
     background: var(--card);
@@ -516,12 +516,13 @@ def main_page():
         # =========================================================================
         # Column 1: Left Rail (Triage Call List)
         # =========================================================================
-        with ui.column().classes("w-[300px] h-screen overflow-y-auto p-[20px_16px] bg-[#ffffff] border-r border-[#e2e8f0] flex-shrink-0"):
+        with ui.column().classes("w-[320px] h-screen overflow-y-auto p-[20px_14px] bg-[#ffffff] border-r border-[#e2e8f0] flex-shrink-0"):
             ui.html("""
-            <div class="flex items-center gap-2 mb-3">
-              <div class="w-6 h-6 rounded bg-[#0c2340] text-white flex items-center justify-center font-bold text-[11px] tracking-wider">JB</div>
-              <span class="text-[11px] uppercase tracking-[1.2px] text-[#0c2340] font-bold">Bank Julius Bär</span>
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-6 h-6 rounded bg-[#0c2340] text-white flex items-center justify-center font-bold text-[12px] tracking-wider">J</div>
+              <span class="text-[14px] uppercase tracking-[1.5px] text-[#0c2340] font-bold">Janus</span>
             </div>
+            <div class="text-[11px] uppercase tracking-[1.2px] text-[#5a6d85] font-semibold mb-3">Julius Bär</div>
             <h1 class="serif-font text-[18px] font-bold text-[#0c2340] m-0 leading-tight">Wealth Intelligence</h1>
             <div class="text-[#5a6d85] text-[12px] mt-1 mb-[16px]">Priscilla Ong · Asia desk · 26 Aug 2026</div>
             <div class="text-[11px] uppercase tracking-[.8px] text-[#5a6d85] mb-[10px] font-semibold">Priority Triage Queue</div>
@@ -547,12 +548,11 @@ def main_page():
 
                     with row_el:
                         ui.html(f"""
-                        <div class="flex justify-between items-baseline gap-2 w-full">
-                          <div class="font-semibold text-[13.5px] text-[#0c2340]">
-                            <span class="rank-badge">{r['rank']}</span>{r['client_name']}
-                          </div>
-                          <div class="serif-font text-[15px] text-[#1f71ac] font-bold">{r['score']}</div>
+                        <div class="flex items-center justify-between w-full mb-1">
+                          <span class="rank-badge">{r['rank']}</span>
+                          <span class="serif-font text-[14px] text-[#1f71ac] font-bold">{r['score']}</span>
                         </div>
+                        <div class="font-semibold text-[13.5px] text-[#0c2340] leading-snug">{r['client_name']}</div>
                         <div class="text-[#5a6d85] text-[11.5px] mt-1 leading-snug">{r['top_reason']}</div>
                         """)
                     row_el.on("click", lambda _, c=cid: select_client(c))
@@ -578,10 +578,7 @@ def main_page():
                 # Header
                 ui.html("""
                 <div class="border-b border-[#e2e8f0] pb-3 mb-3 w-full">
-                  <div class="flex justify-between items-baseline">
-                    <h2 class="serif-font text-[17px] font-bold text-[#0c2340] m-0">RM Decision Log</h2>
-                    <span class="text-[10.5px] text-[#15803d] font-semibold bg-[#e8f5e9] px-2 py-0.5 rounded-full border border-[#c8e6c9]">● Saved to JSON</span>
-                  </div>
+                  <h2 class="serif-font text-[17px] font-bold text-[#0c2340] m-0">RM Decision Log</h2>
                   <div class="text-[11.5px] text-[#5a6d85] mt-0.5">Audit trail & Meeting Prep talking points</div>
                   <div class="text-[11px] text-[#5a6d85] mt-1">
                     <b>""" + str(len(decisions)) + """</b> total · <span class="text-[#15803d]">""" + str(accepted_count) + """ accepted</span> · <span class="text-[#1f71ac]">""" + str(modified_count) + """ modified</span> · <span class="text-[#b91c1c]">""" + str(rejected_count) + """ rejected</span>
@@ -1005,4 +1002,4 @@ def find_available_port(preferred_ports=(8080, 8000, 8081, 8888)) -> int:
 if __name__ in {"__main__", "__mp_main__"}:
     port = find_available_port([8080, 8000, 8081])
     print(f"\n🚀 Launching RM Intelligence Workbench on http://localhost:{port} ...")
-    ui.run(title="Julius Bär — RM Wealth Intelligence", port=port, reload=False, show=True)
+    ui.run(title="Janus | Julius Bär — Wealth Intelligence", port=port, reload=False, show=True)

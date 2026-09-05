@@ -334,16 +334,16 @@ CUSTOM_CSS = """
     text-align: center;
   }
   .event-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
     background: #f1f5f9;
     border: 1px solid #cbd5e1;
     border-radius: 6px;
-    padding: 4px 10px;
+    padding: 6px 12px;
     font-size: 11.5px;
     color: #334155;
-    margin: 3px 4px 3px 0;
+    margin: 3px 0;
   }
   .caveat {
     font-size: 12px;
@@ -417,9 +417,9 @@ CUSTOM_CSS = """
     border: 1px solid #1f71ac !important;
   }
   .btn-action.btn-rejected {
-    background-color: #5a6d85 !important;
+    background-color: #b91c1c !important;
     color: #ffffff !important;
-    border: 1px solid #5a6d85 !important;
+    border: 1px solid #b91c1c !important;
   }
   .btn-action.btn-ghost {
     background-color: #ffffff !important;
@@ -584,14 +584,19 @@ def main_page():
                   </div>
                   <div class="text-[11.5px] text-[#5a6d85] mt-0.5">Audit trail & Meeting Prep talking points</div>
                   <div class="text-[11px] text-[#5a6d85] mt-1">
-                    <b>""" + str(len(decisions)) + """</b> total · <span class="text-[#15803d]">""" + str(accepted_count) + """ accepted</span> · <span class="text-[#1f71ac]">""" + str(modified_count) + """ modified</span>
+                    <b>""" + str(len(decisions)) + """</b> total · <span class="text-[#15803d]">""" + str(accepted_count) + """ accepted</span> · <span class="text-[#1f71ac]">""" + str(modified_count) + """ modified</span> · <span class="text-[#b91c1c]">""" + str(rejected_count) + """ rejected</span>
                   </div>
                 </div>
                 """)
 
                 # Filter buttons
                 with ui.row().classes("w-full gap-1 mb-3"):
-                    for flt, label in [("ALL", "All"), ("ACCEPT", "Accepted"), ("MODIFY", "Modified"), ("REJECT", "Rejected")]:
+                    for flt, label in [
+                        ("ALL", f"All ({len(decisions)})"),
+                        ("ACCEPT", f"Accepted ({accepted_count})"),
+                        ("MODIFY", f"Modified ({modified_count})"),
+                        ("REJECT", f"Rejected ({rejected_count})"),
+                    ]:
                         is_sel = (active_filter["filter"] == flt)
                         f_btn = ui.button(label).props("no-caps unelevated dense").classes(
                             f"text-[11px] px-2 py-0.5 rounded {'btn-dark' if is_sel else 'btn-outline'}"
@@ -618,7 +623,7 @@ def main_page():
                 for d in filtered:
                     d_id = d.get("decision_id", "")
                     act = d.get("action", "")
-                    pill_color = "#15803d" if act == "ACCEPT" else "#1f71ac" if act == "MODIFY" else "#5a6d85"
+                    pill_color = "#15803d" if act == "ACCEPT" else "#1f71ac" if act == "MODIFY" else "#b91c1c"
 
                     with ui.column().classes("decision-card w-full gap-1"):
                         with ui.row().classes("w-full justify-between items-center no-wrap"):
@@ -656,7 +661,7 @@ def main_page():
                             """)
                         elif act == "REJECT":
                             ui.html(f"""
-                            <div class="bg-[#f8fafc] border-l-2 border-[#5a6d85] p-1.5 rounded-r text-[11px] text-[#334155] mt-1 italic">
+                            <div class="bg-[#fef2f2] border-l-2 border-[#b91c1c] p-1.5 rounded-r text-[11px] text-[#991b1b] mt-1 italic">
                               <b>Reason:</b> {d.get('rm_notes') or 'Dismissed by RM'}
                             </div>
                             """)
@@ -735,11 +740,11 @@ def main_page():
                             detail_txt = c.detail or "Mandate & portfolio position exposure"
 
                             metrics_html = f"""
-                            <div class="metric-card flex items-center justify-between w-full my-2.5">
-                              <div>
+                            <div class="metric-card flex items-center justify-between w-full my-2.5" title="{c.label}: {detail_txt}">
+                              <div class="min-w-0 flex-1 pr-3">
                                 <div class="text-[10px] uppercase tracking-wider font-bold text-[#5a6d85]">Exposure & Position Factor</div>
-                                <div class="text-[13.5px] font-bold text-[#0c2340] mt-0.5">{c.label}</div>
-                                <div class="text-[11.5px] text-[#5a6d85] mt-0.5">{detail_txt}</div>
+                                <div class="text-[13.5px] font-bold text-[#0c2340] mt-0.5 leading-snug break-words">{c.label}</div>
+                                <div class="text-[11.5px] text-[#5a6d85] mt-0.5 leading-normal break-words">{detail_txt}</div>
                               </div>
                               <div class="text-right pl-4 border-l border-[#e2e8f0] flex-shrink-0">
                                 <div class="text-[20px] font-bold {val_color} leading-none">{val_str}{unit_str}</div>
@@ -749,38 +754,69 @@ def main_page():
                             """
                         elif len(contribs) > 1:
                             grid_items = []
-                            for c in contribs:
-                                val = c.value
-                                is_neg = isinstance(val, (int, float)) and val < 0
-                                is_pos = isinstance(val, (int, float)) and val > 0 and c.unit == "USD"
-                                val_color = "text-[#b91c1c]" if is_neg else "text-[#15803d]" if is_pos else "text-[#0c2340]"
-                                val_str = ("−" + format_val(abs(val))) if is_neg else ("+" + format_val(val)) if is_pos else format_val(val)
-                                unit_str = f"{c.unit}" if c.unit == "%" else f" {c.unit}" if c.unit else ""
-                                detail_txt = c.detail or "Decomposition factor"
+                            # If 4 or more items (e.g. 6-item attribution), use 2-column wide cards so long fund names fit cleanly without truncation
+                            if len(contribs) >= 4:
+                                for c in contribs:
+                                    val = c.value
+                                    is_neg = isinstance(val, (int, float)) and val < 0
+                                    is_pos = isinstance(val, (int, float)) and val > 0 and c.unit == "USD"
+                                    val_color = "text-[#b91c1c]" if is_neg else "text-[#15803d]" if is_pos else "text-[#0c2340]"
+                                    val_str = ("−" + format_val(abs(val))) if is_neg else ("+" + format_val(val)) if is_pos else format_val(val)
+                                    unit_str = f"{c.unit}" if c.unit == "%" else f" {c.unit}" if c.unit else ""
+                                    detail_txt = c.detail or "Decomposition factor"
 
-                                grid_items.append(f"""
-                                <div class="metric-grid-item flex-1 min-w-[120px]">
-                                  <div class="text-[10px] uppercase tracking-wider font-bold text-[#5a6d85] truncate">{c.label}</div>
-                                  <div class="text-[15px] font-bold {val_color} my-0.5 leading-tight">{val_str}{unit_str}</div>
-                                  <div class="text-[10.5px] text-[#5a6d85] truncate">{detail_txt}</div>
-                                </div>
-                                """)
+                                    grid_items.append(f"""
+                                    <div class="metric-grid-item p-3 flex justify-between items-center gap-3 text-left" title="{c.label}: {detail_txt}">
+                                      <div class="min-w-0 flex-1">
+                                        <div class="text-[11px] uppercase tracking-wider font-bold text-[#0c2340] leading-snug break-words">{c.label}</div>
+                                        <div class="text-[11px] text-[#5a6d85] mt-0.5 leading-normal break-words">{detail_txt}</div>
+                                      </div>
+                                      <div class="text-right flex-shrink-0 pl-3 border-l border-[#e2e8f0]">
+                                        <div class="text-[15px] font-bold {val_color} leading-none">{val_str}{unit_str}</div>
+                                      </div>
+                                    </div>
+                                    """)
+                                grid_container = f'<div class="grid grid-cols-1 md:grid-cols-2 gap-2.5 w-full">{"".join(grid_items)}</div>'
+                            else:
+                                # 2 or 3 items: clean balanced multi-column KPI cards with full text wrap
+                                cols = len(contribs)
+                                for c in contribs:
+                                    val = c.value
+                                    is_neg = isinstance(val, (int, float)) and val < 0
+                                    is_pos = isinstance(val, (int, float)) and val > 0 and c.unit == "USD"
+                                    val_color = "text-[#b91c1c]" if is_neg else "text-[#15803d]" if is_pos else "text-[#0c2340]"
+                                    val_str = ("−" + format_val(abs(val))) if is_neg else ("+" + format_val(val)) if is_pos else format_val(val)
+                                    unit_str = f"{c.unit}" if c.unit == "%" else f" {c.unit}" if c.unit else ""
+                                    detail_txt = c.detail or "Decomposition factor"
+
+                                    grid_items.append(f"""
+                                    <div class="metric-grid-item p-2.5 flex flex-col justify-between text-center" title="{c.label}: {detail_txt}">
+                                      <div class="text-[10.5px] uppercase tracking-wider font-bold text-[#5a6d85] leading-snug break-words">{c.label}</div>
+                                      <div class="text-[16px] font-bold {val_color} my-1 leading-tight">{val_str}{unit_str}</div>
+                                      <div class="text-[10.5px] text-[#5a6d85] leading-tight break-words">{detail_txt}</div>
+                                    </div>
+                                    """)
+                                grid_container = f'<div class="grid grid-cols-{cols} gap-2.5 w-full">{"".join(grid_items)}</div>'
+
                             metrics_html = f"""
                             <div class="metric-card w-full my-2.5">
-                              <div class="text-[10px] uppercase tracking-wider font-bold text-[#5a6d85] mb-2">Performance & Exposure Decomposition</div>
-                              <div class="flex gap-2 w-full flex-wrap">
-                                {"".join(grid_items)}
-                              </div>
+                              <div class="text-[10px] uppercase tracking-wider font-bold text-[#5a6d85] mb-2.5">Performance & Exposure Decomposition</div>
+                              {grid_container}
                             </div>
                             """
 
-                        # 2. Event Log & Evidence Trail (Informational, NOT Buttons)
+                        # 2. Event Log & Evidence Trail (Informational, NOT Buttons, Full Text Wrap)
                         events_html = ""
                         if ins.evidence.event_refs:
                             ev_badges = []
                             for ev in ins.evidence.event_refs:
-                                ev_badges.append(f'<span class="event-badge"><span class="font-bold text-[#0c2340]">⚑ Event Log:</span> {ev}</span>')
-                            events_html = f'<div class="my-2 flex flex-wrap gap-1 w-full">{"".join(ev_badges)}</div>'
+                                ev_badges.append(
+                                    f'<div class="event-badge w-full leading-normal">'
+                                    f'<span class="font-bold text-[#0c2340] flex-shrink-0">⚑ Event Log:</span> '
+                                    f'<span class="break-words text-[#334155]">{ev}</span>'
+                                    f'</div>'
+                                )
+                            events_html = f'<div class="my-2 flex flex-col gap-1.5 w-full">{"".join(ev_badges)}</div>'
 
                         # 3. Caveats
                         caveats_html = ""
@@ -870,7 +906,7 @@ def main_page():
 
                                 def handle_reject(cur_ins=ins, client_n=name):
                                     record_decision(cid, client_n, cur_ins, "REJECT", "Dismissed by RM (intentional mandate drift / prior agreement)")
-                                    ui.notify(f"Rejected & logged to decisions.json", type="warning", color="#5a6d85")
+                                    ui.notify(f"Rejected & logged to decisions.json", type="warning", color="#b91c1c")
                                     refresh_right_panel()
                                     render_client_view(cid)
 

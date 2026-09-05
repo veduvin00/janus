@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>RM Intelligence Workbench</title>
+<style>
+  :root{
+    --ink:#12161c; --slate:#5b6672; --line:#e5e3dd; --paper:#f6f4ef; --card:#fff;
+    --accent:#8a6d3b; --accent-soft:#f0ead9;
+    --crit:#8b2f2f; --high:#b4632a; --med:#8a6d3b; --low:#5b6672;
+    --serif:"Iowan Old Style",Georgia,"Times New Roman",serif;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:var(--sans);color:var(--ink);background:var(--paper);
+       display:grid;grid-template-columns:340px 1fr;min-height:100vh}
+  h1,h2,h3{font-family:var(--serif);font-weight:600;letter-spacing:.2px}
+  .rail{border-right:1px solid var(--line);background:#fbfaf7;padding:22px 18px;overflow-y:auto;height:100vh}
+  .rail h1{font-size:18px;margin:0 0 2px}
+  .rail .sub{color:var(--slate);font-size:12px;margin-bottom:18px}
+  .callrow{border:1px solid var(--line);background:var(--card);border-radius:10px;
+           padding:12px 13px;margin-bottom:9px;cursor:pointer;transition:.12s}
+  .callrow:hover{border-color:var(--accent);transform:translateY(-1px)}
+  .callrow.active{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-soft)}
+  .callrow .top{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+  .callrow .nm{font-weight:600;font-size:14px}
+  .callrow .score{font-family:var(--serif);font-size:16px;color:var(--accent)}
+  .callrow .reason{color:var(--slate);font-size:12px;margin-top:5px;line-height:1.35}
+  .rank{display:inline-block;width:20px;height:20px;line-height:20px;text-align:center;
+        border-radius:50%;background:var(--ink);color:#fff;font-size:11px;margin-right:6px}
+  main{padding:30px 40px;overflow-y:auto;height:100vh;max-width:900px}
+  .hdr{border-bottom:1px solid var(--line);padding-bottom:16px;margin-bottom:8px}
+  .hdr h2{font-size:26px;margin:0 0 4px}
+  .hdr .meta{color:var(--slate);font-size:13px}
+  .obj{font-style:italic;color:var(--ink);background:var(--accent-soft);
+       padding:8px 12px;border-radius:8px;font-size:13px;margin-top:12px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+        padding:18px 20px;margin:16px 0;box-shadow:0 1px 2px rgba(0,0,0,.03)}
+  .card .cardtop{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+  .pill{font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;
+        padding:3px 8px;border-radius:20px;color:#fff}
+  .pill.critical{background:var(--crit)} .pill.high{background:var(--high)}
+  .pill.medium{background:var(--med)} .pill.low{background:var(--low)} .pill.info{background:var(--low)}
+  .type{font-size:11px;text-transform:uppercase;letter-spacing:.8px;color:var(--slate)}
+  .conf{margin-left:auto;font-size:11px;color:var(--slate)}
+  .conf b{color:var(--ink)}
+  .head{font-family:var(--serif);font-size:17px;line-height:1.4;margin:2px 0 10px}
+  .narr{font-size:14px;line-height:1.6;color:#232a32}
+  .chips{margin:12px 0 4px;display:flex;flex-wrap:wrap;gap:7px}
+  .chip{font-size:12px;border:1px solid var(--line);background:var(--paper);
+        border-radius:16px;padding:4px 11px;cursor:pointer;transition:.1s;white-space:nowrap}
+  .chip:hover{border-color:var(--accent);background:var(--accent-soft)}
+  .chip.event{border-style:dashed}
+  .chip.neg{color:var(--crit)}
+  .prov{background:#faf8f3;border:1px solid var(--line);border-left:3px solid var(--accent);
+        border-radius:6px;padding:9px 12px;margin-top:9px;font-size:12.5px;line-height:1.5;display:none}
+  .prov.open{display:block}
+  .prov .k{color:var(--slate)}
+  .caveat{font-size:12.5px;color:var(--high);background:#fbf3ea;border-radius:6px;
+          padding:7px 11px;margin-top:10px}
+  .action{margin-top:14px;border-top:1px dashed var(--line);padding-top:12px}
+  .action .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.7px;color:var(--slate)}
+  .action .txt{font-size:13.5px;margin:4px 0 10px;line-height:1.5}
+  .btns button{font-family:var(--sans);font-size:12px;border:1px solid var(--line);
+       background:#fff;border-radius:7px;padding:6px 13px;margin-right:7px;cursor:pointer}
+  .btns .acc{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .btns button:active{transform:translateY(1px)}
+  .rmnote{margin-top:10px;font-size:12.5px}
+  .rmnote summary{cursor:pointer;color:var(--accent);font-weight:600}
+  .rmnote p{color:#333;background:var(--paper);border-radius:6px;padding:9px 11px;
+            margin:6px 0 0;line-height:1.5;font-style:italic}
+  .empty{color:var(--slate);margin-top:40px}
+  .tag{font-size:10px;color:var(--slate)}
+</style>
+</head>
+<body>
+  <aside class="rail">
+    <h1>Wealth Intelligence</h1>
+    <div class="sub">Priscilla Ong · Asia desk · today 26 Aug 2026</div>
+    <div style="font-size:11px;text-transform:uppercase;letter-spacing:.8px;color:var(--slate);margin-bottom:10px">Who to call first</div>
+    <div id="triage"></div>
+  </aside>
+  <main id="main">
+    <div class="empty">Select a client from the call list.</div>
+  </main>
+
+<script>
+const API = (location.hostname ? "http://"+location.hostname : "http://localhost") + ":8000";
+const fmt = v => typeof v === "number"
+  ? (Math.abs(v)>=1000 ? v.toLocaleString(undefined,{maximumFractionDigits:0}) : v)
+  : v;
+
+async function j(path){ const r = await fetch(API+path); if(!r.ok) throw new Error(r.status); return r.json(); }
+
+async function loadTriage(){
+  const box = document.getElementById("triage");
+  try{
+    const rows = await j("/triage");
+    box.innerHTML = "";
+    rows.forEach(r=>{
+      const el = document.createElement("div");
+      el.className = "callrow"; el.dataset.cid = r.client_id;
+      el.innerHTML = `<div class="top"><div class="nm"><span class="rank">${r.rank}</span>${r.client_name}</div>
+        <div class="score">${r.score}</div></div>
+        <div class="reason">${r.top_reason}</div>`;
+      el.onclick = ()=>{ document.querySelectorAll(".callrow").forEach(x=>x.classList.remove("active"));
+        el.classList.add("active"); loadClient(r.client_id); };
+      box.appendChild(el);
+    });
+  }catch(e){ box.innerHTML = `<div class="empty">API not reachable at ${API}.<br>Run: <code>uvicorn api.main:app</code></div>`; }
+}
+
+function chip(c, i, cls=""){
+  const val = c.value < 0 ? "−"+fmt(Math.abs(c.value)) : fmt(c.value);
+  const unit = c.unit ? " "+c.unit : "";
+  const neg = (typeof c.value==="number" && c.value<0) ? "neg" : "";
+  return `<span class="chip ${cls} ${neg}" onclick="tog('p${i}')">${c.label}: ${val}${unit}</span>
+    <div class="prov" id="p${i}"><span class="k">how derived:</span> ${c.detail||"—"}</div>`;
+}
+function tog(id){ document.getElementById(id).classList.toggle("open"); }
+
+async function loadClient(cid){
+  const main = document.getElementById("main");
+  main.innerHTML = "<div class='empty'>Loading…</div>";
+  const [c, insights] = await Promise.all([ j("/clients/"+cid), j("/clients/"+cid+"/insights") ]);
+  let html = `<div class="hdr"><h2>${c.client_name}</h2>
+    <div class="meta">${cid} · ${Math.round(c.age)}y · ${c.risk_profile} mandate · ${c.base_currency} ·
+    AUM ${Number(c.total_aum_usd).toLocaleString(undefined,{maximumFractionDigits:0})} USD</div>
+    <div class="obj">Objective — ${c.objectives}</div></div>`;
+
+  if(!insights.length){ html += "<div class='empty'>No flags for this client.</div>"; main.innerHTML = html; return; }
+
+  let ci = 0;
+  insights.forEach(ins=>{
+    const chips = ins.contributions.map(c=>chip(c, "c"+(ci++))).join("");
+    const events = (ins.evidence.event_refs||[]).map((e,k)=>
+      `<span class="chip event" onclick="tog('e${ci}_${k}')">⚑ ${e.split(":")[0]}</span>
+       <div class="prov" id="e${ci}_${k}"><span class="k">event_log:</span> ${e}</div>`).join("");
+    ci++;
+    const caveats = (ins.caveats||[]).map(x=>`<div class="caveat">⚠︎ ${x}</div>`).join("");
+    const note = ins.evidence.rm_note ? `<details class="rmnote"><summary>RM note on file</summary><p>${ins.evidence.rm_note}</p></details>` : "";
+    html += `<div class="card">
+      <div class="cardtop"><span class="pill ${ins.severity}">${ins.severity}</span>
+        <span class="type">${ins.type}</span>
+        <span class="conf">confidence <b>${ins.confidence}</b></span></div>
+      <div class="head">${ins.headline}</div>
+      <div class="narr">${ins.narrative}</div>
+      <div class="chips">${chips}${events}</div>
+      ${caveats}${note}
+      <div class="action"><div class="lbl">Suggested action</div>
+        <div class="txt">${ins.suggested_action}</div>
+        <div class="btns"><button class="acc">Accept</button><button>Modify</button><button>Reject</button></div>
+      </div></div>`;
+  });
+  main.innerHTML = html;
+}
+loadTriage();
+</script>
+</body>
+</html>

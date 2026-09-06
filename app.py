@@ -25,7 +25,7 @@ import socket
 from typing import Any
 from nicegui import ui, app
 
-from src.ingest import get_store, DataStore
+from src.ingest import get_store, DataStore, TODAY
 from src.build import build_client_insights
 from src.engine.prioritise import build_triage
 from src.schema import Insight
@@ -413,20 +413,38 @@ CUSTOM_CSS = """
     border-color: #1f71ac !important;
     background-color: #f0f7fc !important;
   }
-  .btn-action.btn-accepted {
+  .btn-action.btn-accepted,
+  .q-btn.btn-action.btn-accepted,
+  .q-btn.bg-primary.btn-accepted {
+    background: #15803d !important;
     background-color: #15803d !important;
     color: #ffffff !important;
     border: 1px solid #15803d !important;
   }
-  .btn-action.btn-modified {
+  .btn-action.btn-accepted .q-btn__content {
+    color: #ffffff !important;
+  }
+  .btn-action.btn-modified,
+  .q-btn.btn-action.btn-modified,
+  .q-btn.bg-primary.btn-modified {
+    background: #1f71ac !important;
     background-color: #1f71ac !important;
     color: #ffffff !important;
     border: 1px solid #1f71ac !important;
   }
-  .btn-action.btn-rejected {
+  .btn-action.btn-modified .q-btn__content {
+    color: #ffffff !important;
+  }
+  .btn-action.btn-rejected,
+  .q-btn.btn-action.btn-rejected,
+  .q-btn.bg-primary.btn-rejected {
+    background: #b91c1c !important;
     background-color: #b91c1c !important;
     color: #ffffff !important;
     border: 1px solid #b91c1c !important;
+  }
+  .btn-action.btn-rejected .q-btn__content {
+    color: #ffffff !important;
   }
   .btn-action.btn-ghost {
     background-color: #ffffff !important;
@@ -498,6 +516,44 @@ CUSTOM_CSS = """
   .decision-card:hover {
     border-color: var(--accent);
   }
+
+  /* Analytics Dashboard Styling */
+  .ana-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin-bottom: 16px;
+    box-shadow: 0 1px 3px rgba(12, 35, 64, 0.04);
+  }
+  .ana-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+  }
+  .ana-table th {
+    background-color: #f8fafc;
+    color: #5a6d85;
+    font-size: 10.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 7px 10px;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  .ana-table td {
+    padding: 9px 10px;
+    border-bottom: 1px solid #f1f5f9;
+    color: #0c2340;
+    vertical-align: middle;
+  }
+  .ana-table tr:last-child td {
+    border-bottom: none;
+  }
+  .ana-table tr:hover td {
+    background-color: #f8fafc;
+  }
 </style>
 <script>
   function tog(id) {
@@ -517,6 +573,7 @@ def main_page():
     active_cid = {"cid": triage_rows[0]["client_id"] if triage_rows else "CL-0012"}
     row_elements: dict[str, ui.element] = {}
     active_filter = {"filter": "ALL"}  # ALL | ACCEPT | MODIFY | REJECT
+    active_center_tab = {"tab": "INSIGHTS"}  # "INSIGHTS" | "ANALYTICS"
 
     # Root 3-column layout: Left Rail (300px) | Center Panel (flex) | Right Rail (340px)
     with ui.row().classes("w-full h-screen no-wrap m-0 p-0 items-stretch overflow-hidden"):
@@ -673,6 +730,143 @@ def main_page():
                             </div>
                             """)
 
+        def render_analytics_view(cid: str):
+            c = store.client(cid)
+            client_name = c.get("client_name") or cid
+
+            # Desk Metrics
+            total_desk_aum = store.clients["total_aum_usd"].sum()
+            client_count = len(store.clients)
+
+            crit_count = 0
+            for _, cr_row in store.credit.iterrows():
+                buf = float(cr_row['margin_call_ltv_pct']) - float(cr_row['ltv_pct_2026-08-26'])
+                if buf < 2.0:
+                    crit_count += 1
+
+            uncalled_pe = store.commitments["uncalled"].sum()
+            total_cash_needs = store.cash_needs["amount"].sum()
+
+            # 1. Desk & Book Overview Header Banner
+            ui.html(f"""
+            <div class="border-b border-[#e2e8f0] pb-3 mb-4 w-full">
+              <div class="flex justify-between items-start">
+                <div>
+                  <h2 class="serif-font text-[22px] font-bold text-[#0c2340] m-0 leading-tight">Desk & Book Overview</h2>
+                  <div class="text-[#5a6d85] text-[12.5px] mt-1">
+                    Whole-book exposure across {client_count} private client relationships · Priscilla Ong (Asia Desk) · 26 Aug 2026
+                  </div>
+                </div>
+                <span class="text-[11px] uppercase tracking-wider font-semibold text-[#15803d] bg-[#f0fdf4] px-2.5 py-1 rounded-full border border-[#bbf7d0]">Live Book Status</span>
+              </div>
+            </div>
+            """).classes("w-full")
+
+            # 2. Four KPI Stat Panels on Top
+            ui.html(f"""
+            <div class="grid grid-cols-4 gap-3 w-full mb-5">
+              <div class="bg-white p-3.5 rounded-lg border border-[#e2e8f0] shadow-sm">
+                <div class="text-[10px] uppercase font-bold tracking-[0.6px] text-[#5a6d85]">Total Desk AUM</div>
+                <div class="serif-font text-[21px] font-bold text-[#0c2340] mt-0.5">${total_desk_aum/1e6:.1f}M</div>
+                <div class="text-[11px] text-[#15803d] font-semibold mt-0.5">{client_count} Active Relationships</div>
+              </div>
+              <div class="bg-white p-3.5 rounded-lg border border-[#e2e8f0] shadow-sm">
+                <div class="text-[10px] uppercase font-bold tracking-[0.6px] text-[#5a6d85]">Lombard Credit Facilities</div>
+                <div class="serif-font text-[21px] font-bold text-[#0c2340] mt-0.5">{len(store.credit)} Active</div>
+                <div class="text-[11px] text-[#b91c1c] font-semibold mt-0.5">{crit_count} Near Margin Call (&lt;2%)</div>
+              </div>
+              <div class="bg-white p-3.5 rounded-lg border border-[#e2e8f0] shadow-sm">
+                <div class="text-[10px] uppercase font-bold tracking-[0.6px] text-[#5a6d85]">Uncalled PE Commitments</div>
+                <div class="serif-font text-[21px] font-bold text-[#0c2340] mt-0.5">${uncalled_pe/1e6:.1f}M</div>
+                <div class="text-[11px] text-[#1f71ac] font-semibold mt-0.5">{len(store.commitments)} Institutional Funds</div>
+              </div>
+              <div class="bg-white p-3.5 rounded-lg border border-[#e2e8f0] shadow-sm">
+                <div class="text-[10px] uppercase font-bold tracking-[0.6px] text-[#5a6d85]">Scheduled Cash Outflows</div>
+                <div class="serif-font text-[21px] font-bold text-[#0c2340] mt-0.5">${total_cash_needs/1e6:.1f}M</div>
+                <div class="text-[11px] text-[#5a6d85] font-semibold mt-0.5">{len(store.cash_needs)} Events on File</div>
+              </div>
+            </div>
+            """).classes("w-full")
+
+            # 3. Asset Class Allocation for the CURRENTLY SELECTED client
+            holdings_c = store.holdings[(store.holdings['client_id'] == cid) & (store.holdings['snapshot_date'] == TODAY)]
+            ac_sum = holdings_c.groupby('asset_class')['market_value_usd'].sum().sort_values(ascending=False)
+            total_client_mv = float(ac_sum.sum())
+
+            ac_colors = {
+                "Equity": "#1f71ac",
+                "Fixed Income": "#0c2340",
+                "Alternatives": "#0d9488",
+                "Cash and Equivalents": "#15803d",
+                "Commodities": "#d97706",
+                "Structured Products": "#7c3aed"
+            }
+
+            if total_client_mv > 0:
+                bar_segments = ""
+                for ac, val in ac_sum.items():
+                    pct = (val / total_client_mv * 100)
+                    color = ac_colors.get(ac, "#64748b")
+                    # flex-grow proportional to holding value guarantees 100% bar fill with zero rounding wrap
+                    bar_segments += f'<div style="flex: {val:.2f} 0 0%; height: 100%; background-color: {color};" title="{ac}: {pct:.1f}% (${val:,.0f})"></div>'
+
+                table_rows = ""
+                for ac, val in ac_sum.items():
+                    pct = (val / total_client_mv * 100)
+                    color = ac_colors.get(ac, "#64748b")
+                    table_rows += f"""
+                    <tr>
+                      <td class="font-medium text-[#0c2340]">
+                        <span class="inline-block w-2.5 h-2.5 rounded-sm mr-2" style="background-color: {color};"></span>
+                        {ac}
+                      </td>
+                      <td class="text-left font-semibold text-[#0c2340]">${val:,.0f}</td>
+                      <td class="text-left font-bold text-[#1f71ac]">{pct:.1f}%</td>
+                      <td class="w-[140px]">
+                        <div class="w-full bg-[#f1f5f9] h-2 rounded-full overflow-hidden">
+                          <div style="width: {pct:.1f}%; background-color: {color}; height: 100%;"></div>
+                        </div>
+                      </td>
+                    </tr>
+                    """
+
+                ui.html(f"""
+                <div class="ana-card w-full">
+                  <div class="flex justify-between items-center mb-2.5">
+                    <div>
+                      <h3 class="serif-font text-[16px] font-bold text-[#0c2340] m-0">Asset Class Allocation — {client_name}</h3>
+                      <div class="text-[11.5px] text-[#5a6d85] mt-0.5">Portfolio exposure for {client_name} ({cid}) · Total ${total_client_mv:,.0f} USD</div>
+                    </div>
+                    <span class="text-[11px] font-semibold text-[#1f71ac] bg-[#eaf2f8] px-2.5 py-0.5 rounded border border-[#d2e3f2]">100% Capital Accounted</span>
+                  </div>
+                  
+                  <div class="w-full h-3.5 rounded-full overflow-hidden flex flex-nowrap mb-3.5 bg-[#e2e8f0]">
+                    {bar_segments}
+                  </div>
+
+                  <table class="ana-table">
+                    <thead>
+                      <tr>
+                        <th>Asset Class</th>
+                        <th class="text-left">Market Value (USD)</th>
+                        <th class="text-left">Share (%)</th>
+                        <th>Distribution</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {table_rows}
+                    </tbody>
+                  </table>
+                </div>
+                """).classes("w-full")
+            else:
+                ui.html(f"""
+                <div class="ana-card w-full">
+                  <h3 class="serif-font text-[16px] font-bold text-[#0c2340] m-0">Asset Class Allocation — {client_name}</h3>
+                  <div class="text-[#5a6d85] text-[12px] mt-2 italic">No active holdings on file for this client as of 26 Aug 2026.</div>
+                </div>
+                """).classes("w-full")
+
         def render_client_view(cid: str):
             main_container.clear()
             c = store.client(cid)
@@ -681,9 +875,51 @@ def main_page():
                     ui.label("Client not found").classes("text-[#5b6672]")
                 return
 
-            insights = get_cached_insights(store, cid)
-
             with main_container:
+                # Top Navigation Tabs: Client Insights & Decisions vs Desk & Portfolio Analytics
+                is_insights = (active_center_tab["tab"] == "INSIGHTS")
+                is_analytics = (active_center_tab["tab"] == "ANALYTICS")
+
+                with ui.row().classes("w-full justify-between items-center border-b border-[#e2e8f0] pb-3 mb-4 no-wrap"):
+                    with ui.row().classes("bg-[#e2e8f0] p-1 rounded-lg gap-1 items-center"):
+                        if is_insights:
+                            tab_ins = ui.button("Client Insights & Decisions").props("no-caps unelevated dense").classes(
+                                "px-3.5 py-1.5 rounded-md text-[12px] font-bold bg-[#0c2340] text-white shadow-sm"
+                            )
+                        else:
+                            tab_ins = ui.button("Client Insights & Decisions").props("no-caps unelevated dense").classes(
+                                "px-3.5 py-1.5 rounded-md text-[12px] font-semibold bg-white border border-[#cbd5e1] hover:bg-[#f8fafc]"
+                            ).style("color: #0c2340 !important;")
+
+                        if is_analytics:
+                            tab_ana = ui.button("Desk & Portfolio Analytics").props("no-caps unelevated dense").classes(
+                                "px-3.5 py-1.5 rounded-md text-[12px] font-bold bg-[#0c2340] text-white shadow-sm"
+                            )
+                        else:
+                            tab_ana = ui.button("Desk & Portfolio Analytics").props("no-caps unelevated dense").classes(
+                                "px-3.5 py-1.5 rounded-md text-[12px] font-semibold bg-white border border-[#cbd5e1] hover:bg-[#f8fafc]"
+                            ).style("color: #0c2340 !important;")
+
+                        def switch_to_ins():
+                            active_center_tab["tab"] = "INSIGHTS"
+                            render_client_view(cid)
+
+                        def switch_to_ana():
+                            active_center_tab["tab"] = "ANALYTICS"
+                            render_client_view(cid)
+
+                        tab_ins.on("click", switch_to_ins)
+                        tab_ana.on("click", switch_to_ana)
+
+                    ui.html(f'<div class="text-[11.5px] text-[#5a6d85]">Selected Client: <b class="text-[#0c2340]">{c.get("client_name")}</b></div>')
+
+                # If in Analytics tab mode, render the desk & client asset allocation view and return
+                if is_analytics:
+                    render_analytics_view(cid)
+                    return
+
+                insights = get_cached_insights(store, cid)
+
                 # Client Header with safe missing-data / NaN checks
                 aum_str = safe_aum(c.get("total_aum_usd"))
                 age_s = safe_age(c.get("age"))
@@ -861,20 +1097,26 @@ def main_page():
                                 btn_accept = ui.button(
                                     "Accepted ✓" if is_acc else "Accept"
                                 ).props("no-caps unelevated").classes(
-                                    f"btn-action {'btn-accepted' if is_acc else 'btn-dark'}"
+                                    f"btn-action {'btn-accepted' if is_acc else 'btn-outline'}"
                                 )
+                                if is_acc:
+                                    btn_accept.style("background: #15803d !important; background-color: #15803d !important; color: #ffffff !important; border: 1px solid #15803d !important;")
 
                                 btn_modify = ui.button(
                                     "Modified ✓" if is_mod else "Modify"
                                 ).props("no-caps unelevated").classes(
                                     f"btn-action {'btn-modified' if is_mod else 'btn-outline'}"
                                 )
+                                if is_mod:
+                                    btn_modify.style("background: #1f71ac !important; background-color: #1f71ac !important; color: #ffffff !important; border: 1px solid #1f71ac !important;")
 
                                 btn_reject = ui.button(
                                     "Rejected ✕" if is_rej else "Reject"
                                 ).props("no-caps unelevated").classes(
                                     f"btn-action {'btn-rejected' if is_rej else 'btn-outline'}"
                                 )
+                                if is_rej:
+                                    btn_reject.style("background: #b91c1c !important; background-color: #b91c1c !important; color: #ffffff !important; border: 1px solid #b91c1c !important;")
 
                                 btn_enquiry = ui.button("🔎 Market Context Enquiry").props("no-caps unelevated").classes(
                                     "btn-action btn-ghost"
@@ -913,7 +1155,7 @@ def main_page():
 
                                 def handle_reject(cur_ins=ins, client_n=name):
                                     record_decision(cid, client_n, cur_ins, "REJECT", "Dismissed by RM (intentional mandate drift / prior agreement)")
-                                    ui.notify(f"Rejected & logged to decisions.json", type="warning", color="#b91c1c")
+                                    ui.notify(f"Rejected & logged to decisions.json", type="negative", color="#b91c1c", icon="close")
                                     refresh_right_panel()
                                     render_client_view(cid)
 
@@ -933,7 +1175,7 @@ def main_page():
                             with enquiry_drawer:
                                 with ui.row().classes("w-full gap-2 items-center no-wrap"):
                                     clean_head = ins.headline.replace('"', '&quot;')
-                                    inp_q = ui.input(value=f'Tell me more about: "{clean_head}"').classes("flex-grow bg-white border border-[#cbd5e1] rounded-md px-2 py-1 text-[12px]").props("dense outlined")
+                                    inp_q = ui.input(value=f'Tell me more about: "{clean_head}"').classes("flex-grow text-[12px]").props("dense outlined bg-color=white")
                                     btn_ask = ui.button("Ask").props("no-caps unelevated").classes("btn-action btn-dark")
 
                                 # Section 1: From computed data (Ask Why)
